@@ -69,16 +69,16 @@ npm run lint:fix      # Autofix ESLint + Prettier
 ## Estado Actual
 
 ```
-Fase:      SPRINT S01 (Fase F0 — Scaffolding) — 6/7 SPECs completados en el repo
-Progreso:  [##                  ] ~5% implementación (6/29 ítems MVP)
+Fase:      SPRINT S01 completo (Fase F0 — Scaffolding) — walking skeleton LIVE. Sprint S02 (F1) en curso
+Progreso:  [###                 ] ~7% implementación (7/29 ítems MVP)
 ```
 
 | Métrica   | Valor                                                                                                    |
 | --------- | -------------------------------------------------------------------------------------------------------- |
 | Plannings | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7) |
-| Sprints   | S01 en curso (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`                              |
+| Sprints   | S01 completo (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`. S02 (F1) en curso           |
 | Tests     | 12 unit (Vitest) + 4 E2E (Playwright), todos en verde                                                    |
-| Pendiente | F0-06 — creación del servicio en EasyPanel (acción humana, guía en `docs/DEPLOYMENT.md`)                 |
+| Deploy    | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                              |
 | MVP       | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                        |
 
 ## Documentación (divulgación progresiva)

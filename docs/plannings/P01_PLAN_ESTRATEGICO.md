@@ -46,12 +46,12 @@
 | F0-03 | CI GitHub Actions: lint + check + test + build en cada push/PR                                                                                          | `.github/workflows/ci.yml`                          |   Bajo   | `[x]`¹ |
 | F0-04 | CDAID setup: CLAUDE.md definitivo, agent_docs/ (architecture, code_conventions, testing, workflow, antipatterns, project_status), templates sprint/SPEC | `CLAUDE.md`, `agent_docs/*`                         |  Medio   | `[x]`  |
 | F0-05 | Dockerfile multi-stage (node:22 build → nginx:alpine) + `nginx.conf` (cache estáticos, gzip, security headers) — patrón blog-sprintjudicial             | `Dockerfile`, `nginx.conf`                          |   Bajo   | `[x]`² |
-| F0-06 | Servicio EasyPanel + DNS `justiciasana.sprintjudicial.com` + Traefik HTTPS + auto-deploy en push a `main`                                               | EasyPanel (VPS) + guía en `docs/`                   |  Medio   | `[ ]`³ |
+| F0-06 | Servicio EasyPanel + DNS `justiciasana.sprintjudicial.com` + Traefik HTTPS + auto-deploy en push a `main`                                               | EasyPanel (VPS) + guía en `docs/`                   |  Medio   | `[x]`³ |
 | F0-07 | Design tokens institucionales (colores Rama Judicial, tipografía, contraste AA)                                                                         | `src/styles/global.css`                             |   Bajo   | `[x]`  |
 
 ¹ Creado y estructuralmente válido; sin ejecución real verificada en GitHub Actions (requiere push remoto).
-² Creado y revisado manualmente; `docker build` no ejecutable en el sandbox de desarrollo (sin daemon Docker con privilegios). Verificación real: primer build en EasyPanel.
-³ **Bloqueante del hito "walking skeleton LIVE"** — requiere acción humana en el panel EasyPanel del VPS. Guía ejecutable: `docs/DEPLOYMENT.md`.
+² Creado y revisado manualmente; `docker build` no ejecutable en el sandbox de desarrollo (sin daemon Docker con privilegios). Verificación real: primer build en EasyPanel (ver nota 3).
+³ Rama `main` creada a partir de la rama de trabajo (repo no tenía `main` aún) y configurada en EasyPanel. Build confirmado exitoso por el propietario (2026-07-24): `astro build` + imagen `easypanel/sprintjudicial/justicia-sana` + nginx sirviendo tráfico. **Walking skeleton LIVE** — resolución pública de `justiciasana.sprintjudicial.com` (DNS/Traefik) pendiente de confirmación del propietario, sin bloquear el resto del plan.
 
 ### Fase F1 — CMS Strapi (publicación sin código, día 1)
 
