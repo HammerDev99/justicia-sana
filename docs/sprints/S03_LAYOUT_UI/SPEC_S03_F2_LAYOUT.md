@@ -89,7 +89,7 @@
 2. `Callout.astro`: caja de aviso (`variant`: info/legal/warning), HTML-first, sin JS.
 3. `Accordion.astro`: usa `<details>/<summary>` nativos — accesible y con teclado sin una sola línea de JavaScript.
 4. `NormaTable.astro`: **tipado contra `Norma` de `src/lib/types.ts`** (el mismo tipo que ya consume `src/lib/strapi.ts` en F1) — queda listo para que F3-02 le pase datos reales de Strapi sin cambiar el componente, solo la fuente de datos.
-5. `AyudaBanner.astro`: banner de ayuda psicológica con `telefono`/`correo`/`mensaje` **opcionales** — si no se pasan (caso de hoy, sin datos reales), muestra un mensaje genérico que enlaza a `/canales-de-ayuda` en vez de fabricar un contacto.
+5. `AyudaBanner.astro`: banner de ayuda psicológica con `telefono`/`correo` **opcionales** — si no se pasan (caso de hoy, sin datos reales), muestra un mensaje genérico fijo que enlaza a `/canales-de-ayuda` en vez de fabricar un contacto.
 6. `ComingSoon.astro`: placeholder honesto ("Sección en preparación") para contenido que aún no gestiona el CCL vía Strapi.
 
 **Criterios de aceptación**:

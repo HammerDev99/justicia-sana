@@ -67,9 +67,9 @@ Sprint 03: [########################] 100% (4/4 SPECs completados)
 
 ## Próximos Pasos
 
-1. Confirmar autoría/push del commit de este sprint.
-2. Auditoría de gate F2 (`docs/validate/AUDIT_03_2026-07-24_GATE_F2_LAYOUT.md`) — Check del ciclo PDCA.
-3. Tras gate F2 aprobado: Sprint S04 (Fase F3 — Contenido Núcleo servido desde Strapi), que reemplazará el contenido estático de `/quienes-somos`, `/normativa` y poblará `/canales-de-ayuda` con datos reales una vez el CCL los cargue (depende de P02 Fases A/B/C completas en el VPS).
+1. ~~Confirmar autoría/push del commit de este sprint.~~ Hecho (`de697b5`).
+2. ~~Auditoría de gate F2~~ — **APROBADO** (SDD 90.6 %, 0 defectos sin resolver). Ver `docs/validate/AUDIT_03_2026-07-24_GATE_F2_LAYOUT.md`.
+3. Sprint S04 (Fase F3 — Contenido Núcleo servido desde Strapi), que reemplazará el contenido estático de `/quienes-somos`, `/normativa` y poblará `/canales-de-ayuda` con datos reales una vez el CCL los cargue (depende de P02 Fases A/B/C completas en el VPS) — **pendiente de orden explícita del propietario del proyecto**.
 
 ---
 

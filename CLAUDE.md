@@ -70,18 +70,19 @@ npm run lint:fix      # Autofix ESLint + Prettier
 ## Estado Actual
 
 ```
-Fase:      SPRINT S03 completo (Fase F2 — Layout) — F0-A resuelto. Sprint S02 (F1) sigue 3/6 en repo
+Fase:      GATE F2 APROBADO (docs/validate/AUDIT_03) — F0-A resuelto. Sprint S02 (F1) sigue 3/6 en repo. S04 (F3) pendiente de orden
 Progreso:  [##########          ] ~48% implementación (14/29 ítems MVP)
 ```
 
-| Métrica   | Valor                                                                                                                        |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Plannings | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7)                     |
-| Sprints   | S01 completo (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`. S02 (F1) — 3/6 en repo. S03 (F2) completo — 4/4 |
-| Tests     | 34 unit (Vitest) + 14 E2E (Playwright), todos en verde                                                                       |
-| Deploy    | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                                                  |
-| Pendiente | F1-01/03/05 (Strapi real) — acción humana en el VPS, guía en `docs/DEPLOYMENT_STRAPI.md`                                     |
-| MVP       | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                                            |
+| Métrica    | Valor                                                                                                                        |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Plannings  | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7)                     |
+| Sprints    | S01 completo (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`. S02 (F1) — 3/6 en repo. S03 (F2) completo — 4/4 |
+| Auditorías | AUDIT_01 (F0) y AUDIT_02 (F1) APROBADO; AUDIT_03 (F2) **APROBADO** — SDD 90.6 %, 0 defectos sin resolver                     |
+| Tests      | 34 unit (Vitest) + 15 E2E (Playwright), todos en verde                                                                       |
+| Deploy     | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                                                  |
+| Pendiente  | F1-01/03/05 (Strapi real) — acción humana en el VPS, guía en `docs/DEPLOYMENT_STRAPI.md`                                     |
+| MVP        | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                                            |
 
 ## Documentación (divulgación progresiva)
 

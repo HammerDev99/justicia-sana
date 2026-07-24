@@ -45,20 +45,44 @@ test.describe('F0-A resuelto — navegación principal sin 404', () => {
   });
 });
 
-test.describe('Seguridad — canales-de-ayuda sin datos fabricados', () => {
-  test('la página no contiene ningún patrón de teléfono ni correo electrónico', async ({
-    page,
-  }) => {
-    await page.goto('/canales-de-ayuda');
-    const bodyText = await page.locator('body').innerText();
+test.describe('Seguridad — sin datos de contacto fabricados', () => {
+  /**
+   * Verifica sobre el HTML crudo (page.content(), no innerText) para que
+   * también capture datos escondidos en atributos como href="tel:..." o
+   * href="mailto:...", no solo en el texto visible.
+   */
+  async function assertSinContactoFabricado(page: import('@playwright/test').Page): Promise<void> {
+    const html = await page.content();
 
-    // Sin direcciones de correo
-    expect(bodyText).not.toMatch(/[\w.+-]+@[\w-]+\.[\w.-]+/);
-    // Sin secuencias que parezcan números telefónicos (7+ dígitos consecutivos, con o sin separadores)
-    expect(bodyText).not.toMatch(/(\+?\d[\s-]?){7,}/);
+    // Sin mailto: ni direcciones de correo en el texto
+    expect(html).not.toMatch(/mailto:/i);
+    expect(html).not.toMatch(/[\w.+-]+@[\w-]+\.[\w.-]+/);
+
+    // Sin tel: (cualquier longitud) ni secuencias de 7+ dígitos con separadores
+    // espacio/guion/punto (formato colombiano típico: 300.123.4567, 300-123-4567)
+    expect(html).not.toMatch(/href=["']tel:/i);
+    expect(html).not.toMatch(/(\+?\d[\s.-]?){7,}/);
+
+    // Líneas de ayuda cortas reales en Colombia (3 dígitos): 106, 123, 141, 155, 192
+    for (const linea of ['106', '123', '141', '155', '192']) {
+      const regex = new RegExp(`(^|[^\\d])${linea}([^\\d]|$)`);
+      expect(html, `no debería mencionar la línea corta ${linea}`).not.toMatch(regex);
+    }
+  }
+
+  test('/canales-de-ayuda no contiene ningún dato de contacto fabricado', async ({ page }) => {
+    await page.goto('/canales-de-ayuda');
+    await assertSinContactoFabricado(page);
   });
 
-  test('muestra un mensaje explícito de contenido en preparación', async ({ page }) => {
+  test('home (con AyudaBanner) tampoco fabrica ningún dato de contacto', async ({ page }) => {
+    await page.goto('/');
+    await assertSinContactoFabricado(page);
+  });
+
+  test('/canales-de-ayuda muestra un mensaje explícito de contenido en preparación', async ({
+    page,
+  }) => {
     await page.goto('/canales-de-ayuda');
     await expect(page.getByText(/preparaci[oó]n/i)).toBeVisible();
   });
