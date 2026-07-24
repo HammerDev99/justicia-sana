@@ -50,9 +50,10 @@ Template: `docs/templates/TEMPLATE_AUDITORIA.md` · Prompt de orquestación: `do
 
 ## Historial de auditorías
 
-| #   | Fecha | Slug | Gate | Veredicto                                                      |
-| --- | ----- | ---- | ---- | -------------------------------------------------------------- |
-| —   | —     | —    | —    | Sin auditorías aún (primera: gate F0 al cierre del Sprint S01) |
+| #   | Fecha      | Slug                  | Gate            | Veredicto                                                                 |
+| --- | ---------- | --------------------- | --------------- | ------------------------------------------------------------------------- |
+| 01  | 2026-07-24 | `GATE_F0_SCAFFOLDING` | F0 (Sprint S01) | **APROBADO** — SDD 100 %, 0 defectos, 3 divergencias rastreadas           |
+| 02  | 2026-07-24 | `GATE_F1_CMS_STRAPI`  | F1 (Sprint S02) | **APROBADO (código)** con salvedad operativa (P02 pendiente) — 0 defectos |
 
 ---
 
