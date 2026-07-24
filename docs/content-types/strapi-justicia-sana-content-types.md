@@ -2,7 +2,7 @@
 
 > Contrato de datos entre Strapi y el cliente tipado en `src/lib/strapi.ts` / `src/lib/types.ts`. Este documento es la **fuente de verdad del esquema**; los nombres de `attributes` deben coincidir literalmente con los tipos de dominio en `src/lib/types.ts`.
 >
-> **Dónde se materializan estos esquemas**: en `production` Strapi desactiva el Content-Type Builder, así que estos 9 content types **no se crean por UI** sino como archivos de esquema (`src/api/**/content-types/**/schema.json`) en un proyecto Strapi versionado (repo previsto `justicia-sana-cms`), traducidos desde este contrato. Ver `docs/plannings/P02_STRAPI_PRODUCCION.md` (Fase B) y `docs/DEPLOYMENT_STRAPI.md` (Paso 4).
+> **Dónde se materializan estos esquemas**: en `production` Strapi desactiva el Content-Type Builder, así que estos 9 content types **no se crean por UI** sino como archivos de esquema (`src/api/**/content-types/**/schema.json`) en un proyecto Strapi versionado — repo **[`HammerDev99/justicia-sana-cms`](https://github.com/HammerDev99/justicia-sana-cms)** (ya creado), traducidos desde este contrato. Ver `docs/plannings/P02_STRAPI_PRODUCCION.md` (Fase B) y `docs/DEPLOYMENT_STRAPI.md` (Paso 4).
 
 ## Mapa de trazabilidad (GAP de P00 → Content Type → Fase de P01)
 

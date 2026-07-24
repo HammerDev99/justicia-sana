@@ -42,15 +42,19 @@ En `NODE_ENV=production` **Strapi desactiva el Content-Type Builder** (no se pue
 | A-04 | Secrets faltantes (encryption key, JWT, etc.) | Env vars                     | Definir `APP_KEYS`, `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET`, `ENCRYPTION_KEY` (generados con `openssl rand -base64 32`) |   Bajo   |
 | A-05 | Uploads (Media Library) en filesystem efímero | EasyPanel                    | Volumen persistente montado en `public/uploads` (o proveedor S3-compatible si se prefiere)                                                                |  Medio   |
 
-### Fase B — Content types reproducibles en producción
+### Fase B — Content types reproducibles en producción ✅ (repo `justicia-sana-cms` creado)
 
-| ID   | Hallazgo                                                                 | Dónde                              | Fix propuesto                                                                                                                                                                      | Esfuerzo |
-| ---- | ------------------------------------------------------------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: |
-| B-01 | Content-Type Builder desactivado en prod → schemas deben estar en código | Repo/imagen de Strapi              | Definir los 9 content types como archivos de esquema Strapi (traducidos desde `docs/content-types/strapi-justicia-sana-content-types.md`) en un proyecto/repo de Strapi versionado |   Alto   |
-| B-02 | Imagen de Strapi no reproducible                                         | Build de EasyPanel                 | Construir imagen desde ese repo (Dockerfile de Strapi), no desde la imagen genérica en modo dev                                                                                    |  Medio   |
-| B-03 | Permisos de la API pública para el build de Astro                        | Strapi Admin (Users & Permissions) | Rol público con `find`/`findOne` sobre los 9 content types (o token read-only ya previsto en F1-03)                                                                                |   Bajo   |
+| ID   | Hallazgo                                                                 | Dónde                                | Fix propuesto                                                                                                                                                                       | Estado |
+| ---- | ------------------------------------------------------------------------ | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----: |
+| B-01 | Content-Type Builder desactivado en prod → schemas deben estar en código | Repo `HammerDev99/justicia-sana-cms` | 9 content types como `schema.json` (traducidos del contrato), generados con `scripts/generate-content-types.py`. **Verificado arrancando Strapi en local**: los 9 endpoints existen | `[x]`  |
+| B-02 | Imagen de Strapi no reproducible                                         | Repo `justicia-sana-cms`             | `Dockerfile` multi-stage (sin HEALTHCHECK — misma lección de F0) + driver `pg` instalado + `config/server.js` con `PUBLIC_URL`/`proxy` para Traefik                                 | `[x]`  |
+| B-03 | Permisos de la API pública para el build de Astro                        | Strapi Admin (Users & Permissions)   | Rol público con `find`/`findOne` sobre los 9 content types (o token read-only de F1-03)                                                                                             | `[ ]`¹ |
 
-> **Nota sobre B**: alternativa de menor esfuerzo pero frágil — persistir todo el directorio de la app Strapi en un volumen y crear los content types una sola vez en modo dev, luego pasar a production. Se descarta como recomendación por no ser reproducible (no versionado, difícil de recuperar ante fallo). B-01/B-02 (esquemas en repo) es la vía recomendada.
+¹ B-03 requiere el Strapi Admin de la instancia real (acción humana), igual que F1-03. B-01/B-02 completados en el repo `justicia-sana-cms`.
+
+> **Hallazgo real durante B-01** (documentado en el README del repo CMS): un single type con `singularName == pluralName` (`home`/`home`) rompe el validador de unicidad de Strapi. Corregido (`home`→`homes`, `quienes-somos`→`quienes-somos-page`); **no afecta la API pública** (los single types se sirven por `singularName`, verificado en el código fuente de Strapi) ni al cliente Astro.
+>
+> **Nota sobre B**: se descartó la alternativa frágil (persistir el directorio de la app y crear los tipos por UI en dev) por no ser reproducible. La vía elegida (esquemas versionados en repo) es la implementada.
 
 ### Fase C — Backups y operación
 

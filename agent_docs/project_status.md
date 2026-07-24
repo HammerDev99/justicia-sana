@@ -31,7 +31,9 @@ Total:    [##                  ] ~8% (10/37 ítems)
 3. **Pendiente del propietario**: completar F1-01/03/05 (`docs/DEPLOYMENT_STRAPI.md`) una vez P02 (Postgres+production) esté listo.
 4. ~~Auditoría de gate F0 (Check)~~ ✅ **AUDIT_01** — APROBADO (SDD 100 %, 0 defectos).
 5. ~~Auditoría de gate F1 (Check)~~ ✅ **AUDIT_02** — APROBADO (código), con salvedad operativa (P02 pendiente).
-6. **Siguiente (a la orden del propietario)**: generar repo Strapi `justicia-sana-cms` (P02 Fase B), luego Sprint S03 (F2 — Layout).
+6. ~~Generar repo Strapi `justicia-sana-cms` (P02 Fase B)~~ ✅ **Creado y pusheado** — `HammerDev99/justicia-sana-cms` (9 content types verificados en local, Dockerfile + driver pg).
+7. **Pendiente del propietario**: P02 Fases A/C (Postgres persistente, volumen uploads, backups) + desplegar `justicia-sana-cms` en EasyPanel + permisos API (B-03).
+8. **Siguiente (a tu orden)**: Sprint S03 (F2 — Layout).
 
 ## Hallazgos abiertos (alimentan las auditorías de gate F0/F1)
 
