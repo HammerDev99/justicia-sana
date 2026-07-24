@@ -59,13 +59,15 @@ En `NODE_ENV=production` **Strapi desactiva el Content-Type Builder** (no se pue
 | C-01 | Sin backups de la BD             | EasyPanel/VPS | `pg_dump` programado (cron/tarea EasyPanel) + retención; snapshot del volumen de uploads |  Medio   |
 | C-02 | Sin verificación de restauración | Operación     | Probar una restauración de backup en un entorno de prueba (documentar el procedimiento)  |   Bajo   |
 
-### Fase D — Documentación y ajustes derivados
+### Fase D — Documentación y ajustes derivados ✅ (completada en el repo — commit de este planning)
 
-| ID   | Hallazgo                                                   | Archivo                             | Fix propuesto                                                                                     | Esfuerzo |
-| ---- | ---------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------- | :------: |
-| D-01 | `DEPLOYMENT_STRAPI.md` no cubre Postgres/secrets/volúmenes | `docs/DEPLOYMENT_STRAPI.md`         | Ampliar con pasos exactos: crear Postgres, env vars, secrets, volúmenes, build desde repo         |  Medio   |
-| D-02 | Manual del editor sugiere crear content types por UI       | `docs/MANUAL_EDITOR_CCL.md`         | Aclarar: editores gestionan **entradas**; el **esquema** lo define el desarrollador (no rompe Q2) |   Bajo   |
-| D-03 | Content types como contrato, aún no como esquemas Strapi   | `docs/content-types/` → repo Strapi | Referenciar el repo/imagen de Strapi donde viven los esquemas reales (resultado de B-01)          |   Bajo   |
+| ID   | Hallazgo                                                   | Archivo                     | Fix propuesto                                                                                                                                               | Estado |
+| ---- | ---------------------------------------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | :----: |
+| D-01 | `DEPLOYMENT_STRAPI.md` no cubre Postgres/secrets/volúmenes | `docs/DEPLOYMENT_STRAPI.md` | Reescrito: arquitectura de 3 servicios, Postgres, env vars, 6 secrets con `openssl`, volumen uploads, content types en código, verificación de persistencia | `[x]`  |
+| D-02 | Manual del editor sugiere crear content types por UI       | `docs/MANUAL_EDITOR_CCL.md` | Aclarado: editores gestionan **entradas** (Content Manager); el **esquema** lo define el equipo técnico (no rompe Q2)                                       | `[x]`  |
+| D-03 | Content types como contrato, aún no como esquemas Strapi   | `docs/content-types/`       | Añadida nota: los esquemas se materializan como `schema.json` en el repo `justicia-sana-cms` (Fase B), no por UI                                            | `[x]`  |
+
+> Fase D es la única parte de P02 ejecutable desde este repositorio (documentación). Las Fases A, B y C requieren acceso al VPS/EasyPanel y quedan `[ ]` hasta que el propietario las ejecute siguiendo `docs/DEPLOYMENT_STRAPI.md`.
 
 ---
 
@@ -101,7 +103,7 @@ En `NODE_ENV=production` **Strapi desactiva el Content-Type Builder** (no se pue
 - [ ] Los 9 content types existen tras el redeploy sin recrearse manualmente (esquemas en código)
 - [ ] La Media Library conserva un archivo subido tras un redeploy
 - [ ] Existe al menos un backup de BD y su procedimiento de restauración está documentado y probado
-- [ ] `docs/DEPLOYMENT_STRAPI.md` y `docs/MANUAL_EDITOR_CCL.md` reflejan el flujo real de producción
+- [x] `docs/DEPLOYMENT_STRAPI.md` y `docs/MANUAL_EDITOR_CCL.md` reflejan el flujo real de producción (Fase D)
 
 ---
 

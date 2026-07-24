@@ -2,7 +2,9 @@
 
 > Guía para miembros del Comité de Convivencia Laboral (CCL) con rol "Editor CCL" en Strapi. Publicar contenido aquí actualiza automáticamente el sitio público — sin necesidad de tocar código ni pedir ayuda a un desarrollador.
 >
-> **Estado de este manual**: borrador estructural. Las capturas de pantalla reales se agregan cuando exista una instancia de Strapi con contenido de prueba (tras `docs/DEPLOYMENT_STRAPI.md`, F1-01) — no se fabrican imágenes de una interfaz que todavía no existe.
+> **Estado de este manual**: borrador estructural. Las capturas de pantalla reales se agregan cuando exista una instancia de Strapi con contenido de prueba (tras `docs/DEPLOYMENT_STRAPI.md`) — no se fabrican imágenes de una interfaz que todavía no existe.
+
+> **Qué gestionas tú y qué no**: como Editor CCL creas, editas y publicas **entradas de contenido** (una norma, un artículo, un recurso, etc.) desde el **Content Manager** — eso es todo lo que necesitas para mantener el portal al día, sin tocar código. Lo que **no** verás es el "Content-Type Builder" (la herramienta para crear los _tipos_ de contenido): esa estructura la define una sola vez el equipo técnico en producción. Si necesitas un campo nuevo o un tipo de contenido que no existe, pídelo al equipo técnico; el día a día de publicar es 100 % tuyo.
 
 ## 1. Acceder a Strapi
 

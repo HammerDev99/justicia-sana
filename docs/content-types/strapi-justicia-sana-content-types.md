@@ -1,6 +1,8 @@
 # Content Types Strapi para Justicia Sana — Portal CCL Seccional Magdalena
 
-> Contrato de datos entre el Strapi Admin (editado por el CCL) y el cliente tipado en `src/lib/strapi.ts` / `src/lib/types.ts`. Crear estos content types en el Strapi Admin del VPS (F1-01) usando esta definición JSON como referencia exacta — los nombres de `attributes` deben coincidir literalmente con los tipos de dominio en `src/lib/types.ts`.
+> Contrato de datos entre Strapi y el cliente tipado en `src/lib/strapi.ts` / `src/lib/types.ts`. Este documento es la **fuente de verdad del esquema**; los nombres de `attributes` deben coincidir literalmente con los tipos de dominio en `src/lib/types.ts`.
+>
+> **Dónde se materializan estos esquemas**: en `production` Strapi desactiva el Content-Type Builder, así que estos 9 content types **no se crean por UI** sino como archivos de esquema (`src/api/**/content-types/**/schema.json`) en un proyecto Strapi versionado (repo previsto `justicia-sana-cms`), traducidos desde este contrato. Ver `docs/plannings/P02_STRAPI_PRODUCCION.md` (Fase B) y `docs/DEPLOYMENT_STRAPI.md` (Paso 4).
 
 ## Mapa de trazabilidad (GAP de P00 → Content Type → Fase de P01)
 
