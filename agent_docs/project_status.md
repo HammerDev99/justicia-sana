@@ -26,22 +26,24 @@ Total:    [##                  ] ~8% (10/37 ítems)
 
 ## Próximo paso
 
-1. **Pendiente del propietario**: confirmar en el navegador que `https://justiciasana.sprintjudicial.com/` resuelve (DNS/Traefik) — no bloquea el resto del plan.
-2. **Pendiente del propietario**: ejecutar `docs/DEPLOYMENT_STRAPI.md` (F1-01, F1-03, F1-05) — aprovisionar Strapi, crear los 9 content types, rol Editor CCL, token y webhook.
-3. Auditoría de gate F0 (Check): `docs/validate/AUDIT_01_..._GATE_F0_SCAFFOLDING.md`.
-4. Auditoría de gate F1 (Check): `docs/validate/AUDIT_02_..._GATE_F1_CMS_STRAPI.md`.
-5. Tras gates aprobados: Sprint S03 (Fase F2 — Layout), que no depende de que F1-01/03/05 estén ejecutados.
+1. **Fix de deploy aplicado** (`27075e9` en `main`): eliminado el `HEALTHCHECK` del Dockerfile que causaba bucle de reinicios en EasyPanel (SIGQUIT ~1 min). Pendiente: confirmar que el redeploy queda estable y el dominio resuelve.
+2. **Pendiente del propietario (crítico)**: adecuar Strapi a producción antes de cargar contenido — se desplegó en SQLite/development (efímero). Planning: `docs/plannings/P02_STRAPI_PRODUCCION.md`.
+3. **Pendiente del propietario**: completar F1-01/03/05 (`docs/DEPLOYMENT_STRAPI.md`) una vez P02 (Postgres+production) esté listo.
+4. Auditoría de gate F0 (Check): `docs/validate/AUDIT_01_..._GATE_F0_SCAFFOLDING.md`.
+5. Auditoría de gate F1 (Check): `docs/validate/AUDIT_02_..._GATE_F1_CMS_STRAPI.md`.
+6. Sprint S03 (Fase F2 — Layout) puede avanzar en paralelo (no depende de Strapi).
 
 ## Hallazgos abiertos (alimentan las auditorías de gate F0/F1)
 
-| Hallazgo                                            | Impacto         | Detalle                                                                                                                   |
-| --------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Resolución pública del dominio sin confirmar        | Bajo            | Build y contenedor OK; confirmación de DNS/Traefik pendiente del propietario (sandbox sin salida a dominios arbitrarios)  |
-| SIGQUIT ~1 min tras arranque en primer deploy       | Bajo, a vigilar | Apagado _graceful_ (workers exit 0), consistente con reinicio de EasyPanel tras deploy. Vigilar que no se repita en bucle |
-| CI (`ci.yml`) sin ejecución real verificada         | Bajo            | Requiere push remoto a GitHub                                                                                             |
-| CVEs altos en `astro@6.4.8`                         | Bajo por ahora  | XSS en islands hidratadas; sin islands hasta F5. Revisar antes de F5 — ver `agent_docs/antipatterns.md`                   |
-| F1-01/03/05 pendientes (Strapi real)                | Bloqueante F1   | Acción humana en el VPS — guía en `docs/DEPLOYMENT_STRAPI.md`                                                             |
-| Cliente Strapi sin verificación de integración real | Bajo            | Tests mockean `fetch`; falta probar contra una instancia real tras F1-01                                                  |
+| Hallazgo                                             | Impacto        | Detalle                                                                                                                  |
+| ---------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Resolución pública del dominio sin confirmar         | Bajo           | Build y contenedor OK; confirmación de DNS/Traefik pendiente del propietario (sandbox sin salida a dominios arbitrarios) |
+| ~~SIGQUIT ~1 min → bucle de reinicios~~ **RESUELTO** | —              | Causa: `HEALTHCHECK` del Dockerfile (`wget --spider` no fiable en BusyBox). Eliminado en `27075e9`                       |
+| Strapi en SQLite/development (efímero)               | **Crítico**    | Se perdería el contenido en cada reinicio. Remediación planificada: `docs/plannings/P02_STRAPI_PRODUCCION.md`            |
+| CI (`ci.yml`) sin ejecución real verificada          | Bajo           | Requiere push remoto a GitHub                                                                                            |
+| CVEs altos en `astro@6.4.8`                          | Bajo por ahora | XSS en islands hidratadas; sin islands hasta F5. Revisar antes de F5 — ver `agent_docs/antipatterns.md`                  |
+| F1-01/03/05 pendientes (Strapi real)                 | Bloqueante F1  | Acción humana en el VPS — guía en `docs/DEPLOYMENT_STRAPI.md`                                                            |
+| Cliente Strapi sin verificación de integración real  | Bajo           | Tests mockean `fetch`; falta probar contra una instancia real tras F1-01                                                 |
 
 ## Métricas
 

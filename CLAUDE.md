@@ -90,6 +90,7 @@ Progreso:  [###                 ] ~10% implementación (10/29 ítems MVP)
 | Propuesta del cliente                               | `docs/cliente/PROPUESTA_CCL_PLATAFORMA.md`                                                         |
 | Requisitos, gap analysis SIRAL, supuestos           | `docs/plannings/P00_ANALISIS_REQUISITOS.md`                                                        |
 | Línea de trabajo (fases, sprints, esfuerzo)         | `docs/plannings/P01_PLAN_ESTRATEGICO.md`                                                           |
+| Adecuar Strapi a producción (Postgres, secrets)     | `docs/plannings/P02_STRAPI_PRODUCCION.md`                                                          |
 | Metodología SDD Framework v2 (CDAID v2, ciclo PDCA) | Skill local `.claude/skills/sdd-framework-v2/` (canónico: repo `HammerDev99/sdd-framework`)        |
 | Auditorías y gates entre fases                      | `docs/validate/README.md` + `docs/prompts/01_BASE_CHECK_*`                                         |
 | Arquitectura, convenciones, testing, antipatrones   | `agent_docs/` (architecture, code_conventions, testing, workflow, antipatterns)                    |
