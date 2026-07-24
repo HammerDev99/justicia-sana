@@ -1,10 +1,20 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
 import Card from '../components/ui/Card.astro';
 import Callout from '../components/ui/Callout.astro';
 import Accordion from '../components/ui/Accordion.astro';
 import type { AccordionItem } from '../components/ui/Accordion.astro';
 import AyudaBanner from '../components/ui/AyudaBanner.astro';
+import { fetchCanalesAyuda } from '../lib/strapi';
+
+/**
+ * Cableado real contra Strapi (F3-05). Sin instancia en producción hoy,
+ * degrada a [] y AyudaBanner cae a su fallback ya auditado en F2 (enlace a
+ * /canales-de-ayuda, sin fabricar contacto).
+ */
+const canales = await fetchCanalesAyuda();
+const canalAyudaPsicologica = canales.find((canal) => canal.tipo_canal === 'Atención psicológica');
 
 const faq: readonly AccordionItem[] = [
   {
@@ -15,25 +25,23 @@ const faq: readonly AccordionItem[] = [
   {
     question: '¿Puedo radicar una queja desde este portal?',
     answer:
-      'No. Este portal es informativo y público. Las quejas formales de acoso laboral se tramitan de forma confidencial a través del sistema interno SIRAL, con acceso restringido a servidores judiciales.',
+      'No. Este portal es informativo y público. Las quejas formales de acoso laboral se tramitan de forma confidencial a través del sistema interno SIRAL, con acceso restringido a servidores judiciales. Consulta la sección "Radicar una queja" para más detalle.',
   },
 ];
 ---
 
 <PageLayout title="Inicio">
-  <h1 class="text-3xl font-bold text-brand-primary sm:text-4xl">
-    Comité de Convivencia Laboral — Rama Judicial, Seccional Magdalena
-  </h1>
-  <p class="mt-4 max-w-2xl text-lg">
-    Promovemos ambientes de trabajo sanos y libres de acoso laboral, en armonía con la Resolución
-    3461 de 2025. Este portal es la cara pública del Comité: normativa, pedagogía, canales de ayuda
-    y transparencia.
-  </p>
+  <PageHeader
+    title="Comité de Convivencia Laboral — Rama Judicial, Seccional Magdalena"
+    description="Promovemos ambientes de trabajo sanos y libres de acoso laboral, en armonía con la Resolución 3461 de 2025. Este portal es la cara pública del Comité: normativa, pedagogía, canales de ayuda y transparencia."
+  />
 
   <div class="mt-6 max-w-2xl">
     <Callout variant="info" title="¿Buscas radicar una queja?">
       Este portal es informativo. Las quejas formales de acoso laboral se gestionan de forma
-      confidencial en el sistema interno <strong>SIRAL</strong>, no aquí.
+      confidencial en el sistema interno <strong>SIRAL</strong>, no aquí. Consulta{' '}
+      <a href="/radicar-una-queja" class="underline"> cómo radicar una queja </a>
+      .
     </Callout>
   </div>
 
@@ -63,6 +71,9 @@ const faq: readonly AccordionItem[] = [
   </section>
 
   <div class="mt-10 max-w-2xl">
-    <AyudaBanner />
+    <AyudaBanner
+      telefono={canalAyudaPsicologica?.telefono ?? undefined}
+      correo={canalAyudaPsicologica?.correo ?? undefined}
+    />
   </div>
 </PageLayout>

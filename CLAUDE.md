@@ -41,7 +41,7 @@ justicia-sana/
 │   ├── cliente/              # Propuesta original (docx + md)
 │   ├── content-types/        # Contrato JSON de content types Strapi
 │   ├── plannings/            # [Plan] P00, P01 + template
-│   ├── sprints/              # [Do] S01_SCAFFOLDING, S02_CMS_STRAPI, S03_LAYOUT_UI (SPECs + resumen) + _TEMPLATE_SPRINT
+│   ├── sprints/              # [Do] S01_SCAFFOLDING, S02_CMS_STRAPI, S03_LAYOUT_UI, S04_CONTENIDO_NUCLEO (SPECs + resumen) + _TEMPLATE_SPRINT
 │   ├── validate/             # [Check/Act] AUDIT_NN consolidadas + README
 │   ├── templates/            # TEMPLATE_SDD_SPEC, TEMPLATE_AUDITORIA
 │   ├── prompts/              # Prompts BASE de orquestación (Plan/Check/Do)
@@ -70,19 +70,19 @@ npm run lint:fix      # Autofix ESLint + Prettier
 ## Estado Actual
 
 ```
-Fase:      GATE F2 APROBADO (docs/validate/AUDIT_03) — F0-A resuelto. Sprint S02 (F1) sigue 3/6 en repo. S04 (F3) pendiente de orden
-Progreso:  [##########          ] ~48% implementación (14/29 ítems MVP)
+Fase:      SPRINT S04 completo (Fase F3 — Contenido Núcleo) — cableado real contra Strapi, degradación agraciada verificada. Sprint S02 (F1) sigue 3/6 en repo. Gate F3 pendiente de orden
+Progreso:  [##############      ] ~72% implementación (21/29 ítems MVP)
 ```
 
-| Métrica    | Valor                                                                                                                        |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Plannings  | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7)                     |
-| Sprints    | S01 completo (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`. S02 (F1) — 3/6 en repo. S03 (F2) completo — 4/4 |
-| Auditorías | AUDIT_01 (F0) y AUDIT_02 (F1) APROBADO; AUDIT_03 (F2) **APROBADO** — SDD 90.6 %, 0 defectos sin resolver                     |
-| Tests      | 34 unit (Vitest) + 15 E2E (Playwright), todos en verde                                                                       |
-| Deploy     | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                                                  |
-| Pendiente  | F1-01/03/05 (Strapi real) — acción humana en el VPS, guía en `docs/DEPLOYMENT_STRAPI.md`                                     |
-| MVP        | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                                            |
+| Métrica    | Valor                                                                                                                                                      |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Plannings  | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7)                                                   |
+| Sprints    | S01 completo (F0). S02 (F1) — 3/6 en repo. S03 (F2) completo — 4/4. S04 (F3) completo — 7/7 (ver `docs/sprints/S04_CONTENIDO_NUCLEO/00_RESUMEN_SPRINT.md`) |
+| Auditorías | AUDIT_01 (F0), AUDIT_02 (F1) y AUDIT_03 (F2) APROBADO — SDD 90.6 % en F2, 0 defectos sin resolver. AUDIT_04 (F3) pendiente de orden                        |
+| Tests      | 34 unit (Vitest) + 23 E2E (Playwright), todos en verde                                                                                                     |
+| Deploy     | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                                                                                |
+| Pendiente  | F1-01/03/05 (Strapi real) — acción humana en el VPS, guía en `docs/DEPLOYMENT_STRAPI.md`. F3 cableado pero sin contenido real hasta entonces + insumos CCL |
+| MVP        | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                                                                          |
 
 ## Documentación (divulgación progresiva)
 

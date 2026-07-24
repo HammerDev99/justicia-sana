@@ -1,0 +1,11 @@
+---
+export interface Props {
+  readonly title: string;
+  readonly description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<h1 class="text-3xl font-bold text-brand-primary sm:text-4xl">{title}</h1>
+{description && <p class="mt-4 max-w-2xl text-lg">{description}</p>}

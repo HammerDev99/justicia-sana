@@ -1,0 +1,52 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import ComingSoon from '../components/ui/ComingSoon.astro';
+import { fetchRecursosPedagogicos } from '../lib/strapi';
+
+/**
+ * Cableado real contra Strapi (F3-03). Sin instancia en producción hoy,
+ * fetchRecursosPedagogicos() degrada a [] y se muestra un placeholder honesto.
+ */
+const recursos = await fetchRecursosPedagogicos();
+---
+
+<PageLayout
+  title="Material pedagógico"
+  description="Infografías, folletos, videos y guías sobre acoso laboral publicados por el Comité de Convivencia Laboral."
+>
+  <PageHeader
+    title="Material pedagógico"
+    description="Recursos para entender qué es el acoso laboral, sus modalidades y cómo actuar como víctima o testigo."
+  />
+
+  {
+    recursos.length > 0 ? (
+      <ul class="mt-8 grid gap-6 sm:grid-cols-2" role="list">
+        {recursos.map((recurso) => (
+          <li class="rounded-lg border border-brand-surface-alt p-4">
+            <p class="text-xs font-semibold uppercase text-brand-accent">
+              {recurso.tipo_recurso} · {recurso.tema}
+            </p>
+            <p class="mt-1 font-semibold text-brand-primary">{recurso.titulo}</p>
+            <p class="mt-1 text-sm">{recurso.descripcion}</p>
+            {recurso.url_video && (
+              <a href={recurso.url_video} class="mt-2 inline-block text-sm underline">
+                Ver video
+              </a>
+            )}
+            {recurso.archivo && (
+              <a href={recurso.archivo.url} class="mt-2 inline-block text-sm underline">
+                Descargar
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="mt-8 max-w-2xl">
+        <ComingSoon mensaje="El Comité está preparando el material pedagógico sobre acoso laboral (infografías, folletos, videos y guías). Se publicará en esta sección tan pronto esté disponible." />
+      </div>
+    )
+  }
+</PageLayout>

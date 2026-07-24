@@ -30,7 +30,7 @@ test.describe('PageLayout — Header/Footer en todas las páginas', () => {
 });
 
 test.describe('F0-A resuelto — navegación principal sin 404', () => {
-  test('los 4 enlaces de navLinks responden 200', async ({ page, request }) => {
+  test('todos los enlaces de navLinks responden 200', async ({ page, request }) => {
     await page.goto('/');
     const nav = page.getByRole('navigation', { name: /principal/i });
     const hrefs = await nav

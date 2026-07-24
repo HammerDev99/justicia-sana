@@ -1,21 +1,44 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
 import ComingSoon from '../components/ui/ComingSoon.astro';
+import { fetchCanalesAyuda } from '../lib/strapi';
+
+/**
+ * Cableado real contra Strapi (F3-05). Sin instancia en producción hoy,
+ * fetchCanalesAyuda() degrada a [] y se conserva el ComingSoon ya auditado
+ * en F2 — sin fabricar ningún dato de contacto.
+ */
+const canales = await fetchCanalesAyuda();
 ---
 
 <PageLayout
   title="Canales de ayuda"
   description="Canales de atención psicológica y contacto del Comité de Convivencia Laboral."
 >
-  <h1 class="text-3xl font-bold text-brand-primary sm:text-4xl">Canales de ayuda</h1>
-  <p class="mt-4 max-w-2xl text-lg">
-    Aquí encontrarás los canales oficiales de atención psicológica y contacto del Comité de
-    Convivencia Laboral.
-  </p>
+  <PageHeader
+    title="Canales de ayuda"
+    description="Aquí encontrarás los canales oficiales de atención psicológica y contacto del Comité de Convivencia Laboral."
+  />
 
-  <div class="mt-8 max-w-2xl">
-    <ComingSoon
-      mensaje="El Comité está configurando los canales oficiales de atención (línea psicológica, correo de contacto, horarios). Se publicarán en esta sección tan pronto estén disponibles — no se muestran datos provisionales para evitar confusión."
-    />
-  </div>
+  {
+    canales.length > 0 ? (
+      <ul class="mt-8 max-w-2xl space-y-4" role="list">
+        {canales.map((canal) => (
+          <li class="rounded-lg border border-brand-surface-alt p-4">
+            <p class="font-semibold text-brand-primary">{canal.nombre}</p>
+            <p class="text-sm text-brand-ink">{canal.tipo_canal}</p>
+            {canal.telefono && <p class="mt-1 text-sm">Teléfono: {canal.telefono}</p>}
+            {canal.correo && <p class="text-sm">Correo: {canal.correo}</p>}
+            {canal.horario && <p class="text-sm">Horario: {canal.horario}</p>}
+            {canal.descripcion && <p class="mt-1 text-sm">{canal.descripcion}</p>}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="mt-8 max-w-2xl">
+        <ComingSoon mensaje="El Comité está configurando los canales oficiales de atención (línea psicológica, correo de contacto, horarios). Se publicarán en esta sección tan pronto estén disponibles — no se muestran datos provisionales para evitar confusión." />
+      </div>
+    )
+  }
 </PageLayout>

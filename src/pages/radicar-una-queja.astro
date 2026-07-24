@@ -1,0 +1,40 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import Callout from '../components/ui/Callout.astro';
+---
+
+<PageLayout
+  title="Radicar una queja"
+  description="Cómo radicar una queja formal de acoso laboral a través del sistema interno SIRAL."
+>
+  <PageHeader
+    title="Radicar una queja"
+    description="Este portal es informativo y público. Las quejas formales de acoso laboral se tramitan por un canal interno distinto, con reglas propias de confidencialidad y no-anonimato."
+  />
+
+  <h2 class="mt-8 text-xl font-semibold text-brand-primary">¿Cómo radico una queja formal?</h2>
+  <p class="mt-2 max-w-2xl">
+    Si eres funcionario/a de la Rama Judicial, el trámite formal se realiza a través del sistema
+    interno <strong>SIRAL</strong>, disponible para personal autenticado de la Rama Judicial. Este
+    portal público no tramita quejas — es la cara informativa del Comité de Convivencia Laboral.
+  </p>
+
+  <h2 class="mt-8 text-xl font-semibold text-brand-primary">Confidencialidad y no anonimato</h2>
+  <p class="mt-2 max-w-2xl">
+    Las quejas de acoso laboral <strong>no son anónimas</strong> — requieren un sujeto identificable,
+    conforme a la Ley 1010 de 2006. El trámite en sí es confidencial: la Resolución 3461 de 2025 establece
+    reglas de confidencialidad y apoyo psicológico durante todo el procedimiento ante el Comité de Convivencia
+    Laboral.
+  </p>
+
+  <div class="mt-6 max-w-2xl">
+    <Callout variant="legal" title="¿Necesitas ayuda antes de radicar?">
+      Consulta los{' '}
+      <a href="/canales-de-ayuda" class="underline"> canales de ayuda disponibles </a>{' '}
+      o revisa la{' '}
+      <a href="/normativa" class="underline"> normativa aplicable </a>
+      .
+    </Callout>
+  </div>
+</PageLayout>
