@@ -1,0 +1,41 @@
+---
+import type { Norma } from '../../lib/types';
+
+/**
+ * Solo los campos necesarios para el listado — un subconjunto de `Norma`
+ * (el mismo tipo que ya consume src/lib/strapi.ts). Cualquier `Norma` real
+ * de Strapi (F3-02) satisface este tipo sin cambios: solo cambia la fuente
+ * de datos (array estático hoy → fetchNormas() en F3), no el componente.
+ */
+export type NormaResumen = Pick<Norma, 'titulo' | 'resumen_lenguaje_claro' | 'estado_vigencia'>;
+
+export interface Props {
+  readonly normas: readonly NormaResumen[];
+}
+
+const { normas } = Astro.props;
+---
+
+<table class="w-full border-collapse text-left text-sm">
+  <caption class="sr-only">Normativa aplicable al Comité de Convivencia Laboral</caption>
+  <thead>
+    <tr class="border-b border-brand-surface-alt text-brand-ink">
+      <th scope="col" class="py-2 pr-4 font-semibold">Norma</th>
+      <th scope="col" class="py-2 pr-4 font-semibold">Alcance</th>
+      <th scope="col" class="py-2 font-semibold">Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      normas.map((norma) => (
+        <tr class="border-b border-brand-surface-alt/60 align-top">
+          <th scope="row" class="py-3 pr-4 font-medium text-brand-primary">
+            {norma.titulo}
+          </th>
+          <td class="py-3 pr-4">{norma.resumen_lenguaje_claro}</td>
+          <td class="py-3">{norma.estado_vigencia}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

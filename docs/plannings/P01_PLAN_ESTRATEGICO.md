@@ -72,12 +72,16 @@
 
 ### Fase F2 — Layout y Sistema de Diseño
 
-| ID    | Ítem                                                                                               | Esfuerzo |
-| ----- | -------------------------------------------------------------------------------------------------- | :------: |
-| F2-01 | BaseLayout + PageLayout con SEO completo (meta, OG, sitemap, robots)                               |  Medio   |
-| F2-02 | Header/Footer institucionales + navegación accesible (keyboard, ARIA)                              |  Medio   |
-| F2-03 | Componentes UI: Card, Callout legal, Accordion (FAQ), tabla normativa, banner de ayuda psicológica |  Medio   |
-| F2-04 | Home: misión del CCL, accesos rápidos (radicar queja → SIRAL, ayuda psicológica, normativa)        |  Medio   |
+> **Ejecutado en Sprint S03** — ver `docs/sprints/S03_LAYOUT_UI/` (SPECs formales + resumen de progreso).
+
+| ID    | Ítem                                                                                               | Esfuerzo | Estado |
+| ----- | -------------------------------------------------------------------------------------------------- | :------: | :----: |
+| F2-01 | BaseLayout + PageLayout con SEO completo (meta, OG, sitemap, robots)                               |  Medio   | `[x]`  |
+| F2-02 | Header/Footer institucionales + navegación accesible (keyboard, ARIA)                              |  Medio   | `[x]`  |
+| F2-03 | Componentes UI: Card, Callout legal, Accordion (FAQ), tabla normativa, banner de ayuda psicológica |  Medio   | `[x]`  |
+| F2-04 | Home: misión del CCL, accesos rápidos (radicar queja → SIRAL, ayuda psicológica, normativa)        |  Medio   | `[x]`¹ |
+
+¹ Ampliado más allá del alcance literal: también crea `/quienes-somos`, `/normativa` y `/canales-de-ayuda`, resolviendo el hallazgo F0-A de `AUDIT_01` (enlaces con 404). Contenido estático trazable a `CLAUDE.md`/la propuesta, sin fabricar datos de contacto; F3 lo reemplaza con Strapi.
 
 ### Fase F3 — Contenido Núcleo (Componente 2 de la propuesta, servido desde Strapi)
 

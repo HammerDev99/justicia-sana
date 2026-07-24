@@ -41,7 +41,7 @@ justicia-sana/
 │   ├── cliente/              # Propuesta original (docx + md)
 │   ├── content-types/        # Contrato JSON de content types Strapi
 │   ├── plannings/            # [Plan] P00, P01 + template
-│   ├── sprints/              # [Do] S01_SCAFFOLDING, S02_CMS_STRAPI (SPECs + resumen) + _TEMPLATE_SPRINT
+│   ├── sprints/              # [Do] S01_SCAFFOLDING, S02_CMS_STRAPI, S03_LAYOUT_UI (SPECs + resumen) + _TEMPLATE_SPRINT
 │   ├── validate/             # [Check/Act] AUDIT_NN consolidadas + README
 │   ├── templates/            # TEMPLATE_SDD_SPEC, TEMPLATE_AUDITORIA
 │   ├── prompts/              # Prompts BASE de orquestación (Plan/Check/Do)
@@ -70,18 +70,18 @@ npm run lint:fix      # Autofix ESLint + Prettier
 ## Estado Actual
 
 ```
-Fase:      SPRINT S01 completo (Fase F0 — Scaffolding) — walking skeleton LIVE. Sprint S02 (F1) en curso
-Progreso:  [###                 ] ~10% implementación (10/29 ítems MVP)
+Fase:      SPRINT S03 completo (Fase F2 — Layout) — F0-A resuelto. Sprint S02 (F1) sigue 3/6 en repo
+Progreso:  [##########          ] ~48% implementación (14/29 ítems MVP)
 ```
 
-| Métrica   | Valor                                                                                                    |
-| --------- | -------------------------------------------------------------------------------------------------------- |
-| Plannings | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7) |
-| Sprints   | S01 completo (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`. S02 (F1) — 3/6 en curso     |
-| Tests     | 34 unit (Vitest) + 4 E2E (Playwright), todos en verde                                                    |
-| Deploy    | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                              |
-| Pendiente | F1-01/03/05 (Strapi real) — acción humana en el VPS, guía en `docs/DEPLOYMENT_STRAPI.md`                 |
-| MVP       | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                        |
+| Métrica   | Valor                                                                                                                        |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Plannings | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7)                     |
+| Sprints   | S01 completo (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`. S02 (F1) — 3/6 en repo. S03 (F2) completo — 4/4 |
+| Tests     | 34 unit (Vitest) + 14 E2E (Playwright), todos en verde                                                                       |
+| Deploy    | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                                                  |
+| Pendiente | F1-01/03/05 (Strapi real) — acción humana en el VPS, guía en `docs/DEPLOYMENT_STRAPI.md`                                     |
+| MVP       | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                                            |
 
 ## Documentación (divulgación progresiva)
 

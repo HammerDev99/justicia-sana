@@ -1,0 +1,27 @@
+---
+import { site } from '../lib/site';
+
+export interface Props {
+  readonly title: string;
+  readonly description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const pageTitle = `${title} · ${site.shortName}`;
+const canonicalUrl = new URL(Astro.url.pathname, site.url).toString();
+---
+
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+
+<link rel="canonical" href={canonicalUrl} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.shortName} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
