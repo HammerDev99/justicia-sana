@@ -1,0 +1,46 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import PageHeader from '../../components/ui/PageHeader.astro';
+import ComingSoon from '../../components/ui/ComingSoon.astro';
+import { fetchArticulos } from '../../lib/strapi';
+
+/**
+ * Cableado real contra Strapi (F3-04). Sin instancia en producción hoy,
+ * fetchArticulos() degrada a [] y se muestra un placeholder honesto.
+ */
+const articulos = await fetchArticulos();
+---
+
+<PageLayout
+  title="Noticias y jurisprudencia"
+  description="Noticias, jurisprudencia y campañas publicadas por el Comité de Convivencia Laboral."
+>
+  <PageHeader
+    title="Noticias y jurisprudencia"
+    description="Actualidad, jurisprudencia relevante y campañas del Comité de Convivencia Laboral."
+  />
+
+  {
+    articulos.length > 0 ? (
+      <ul class="mt-8 space-y-6" role="list">
+        {articulos.map((articulo) => (
+          <li class="rounded-lg border border-brand-surface-alt p-4">
+            <p class="text-xs font-semibold uppercase text-brand-accent">{articulo.categoria}</p>
+            <a
+              href={`/noticias/${articulo.slug}`}
+              class="mt-1 block font-semibold text-brand-primary hover:underline"
+            >
+              {articulo.titulo}
+            </a>
+            <p class="mt-1 text-sm">{articulo.resumen}</p>
+            <p class="mt-1 text-xs text-brand-ink">{articulo.fecha_publicacion}</p>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="mt-8 max-w-2xl">
+        <ComingSoon mensaje="El Comité aún no ha publicado noticias ni jurisprudencia. Se publicarán en esta sección tan pronto estén disponibles." />
+      </div>
+    )
+  }
+</PageLayout>

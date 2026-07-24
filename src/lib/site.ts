@@ -21,5 +21,9 @@ export const navLinks: readonly NavLink[] = [
   { label: 'Inicio', href: '/' },
   { label: '¿Quiénes somos?', href: '/quienes-somos' },
   { label: 'Normativa', href: '/normativa' },
+  { label: 'Material pedagógico', href: '/material-pedagogico' },
+  { label: 'Noticias', href: '/noticias' },
+  { label: 'Capacitaciones y comunicados', href: '/capacitaciones-y-comunicados' },
   { label: 'Canales de ayuda', href: '/canales-de-ayuda' },
+  { label: 'Radicar una queja', href: '/radicar-una-queja' },
 ] as const;

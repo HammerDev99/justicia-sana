@@ -1,34 +1,78 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import { fetchQuienesSomos, fetchIntegrantesComite } from '../lib/strapi';
+
+/**
+ * Cableado real contra Strapi (F3-01). Hoy no existe instancia en producción
+ * (F1-01 pendiente) ni insumos del CCL, así que fetchQuienesSomos()/
+ * fetchIntegrantesComite() degradan a null/[] y esta página cae al contenido
+ * estático ya auditado en F2 — comportamiento de producción real, no un mock.
+ */
+const quienesSomos = await fetchQuienesSomos();
+const integrantes = await fetchIntegrantesComite();
 ---
 
 <PageLayout
   title="¿Quiénes somos?"
   description="Estructura, objetivo y funciones del Comité de Convivencia Laboral — Rama Judicial, Seccional Magdalena."
 >
-  <h1 class="text-3xl font-bold text-brand-primary sm:text-4xl">¿Quiénes somos?</h1>
+  <PageHeader
+    title="¿Quiénes somos?"
+    description="El Comité de Convivencia Laboral (CCL) de la Rama Judicial — Seccional Magdalena es la instancia encargada de la gestión preventiva, confidencial y pedagógica frente al acoso laboral, en armonía con los retos de modernización institucional de la Rama Judicial."
+  />
 
-  <p class="mt-4 max-w-2xl text-lg">
-    El Comité de Convivencia Laboral (CCL) de la Rama Judicial — Seccional Magdalena es la instancia
-    encargada de la gestión preventiva, confidencial y pedagógica frente al acoso laboral, en
-    armonía con los retos de modernización institucional de la Rama Judicial.
-  </p>
+  {
+    quienesSomos ? (
+      <>
+        <h2 class="mt-8 text-xl font-semibold text-brand-primary">Misión</h2>
+        <p class="mt-2 max-w-2xl">{quienesSomos.mision}</p>
 
-  <h2 class="mt-8 text-xl font-semibold text-brand-primary">Objetivo</h2>
-  <p class="mt-2 max-w-2xl">
-    Promover ambientes de trabajo sanos y libres de acoso laboral, atendiendo los lineamientos de la
-    Resolución 3461 de 2025 del Ministerio de Trabajo, que redefinió la conformación y funciones de
-    los comités de convivencia laboral con énfasis en la prevención eficaz del acoso, la salud
-    mental y la protección de derechos fundamentales.
-  </p>
+        <h2 class="mt-8 text-xl font-semibold text-brand-primary">Funciones</h2>
+        <p class="mt-2 max-w-2xl">{quienesSomos.funciones}</p>
+
+        {quienesSomos.reglamento_pdf && (
+          <p class="mt-4">
+            <a href={quienesSomos.reglamento_pdf.url} class="text-brand-primary underline">
+              Consultar el reglamento (PDF)
+            </a>
+          </p>
+        )}
+      </>
+    ) : (
+      <>
+        <h2 class="mt-8 text-xl font-semibold text-brand-primary">Objetivo</h2>
+        <p class="mt-2 max-w-2xl">
+          Promover ambientes de trabajo sanos y libres de acoso laboral, atendiendo los lineamientos
+          de la Resolución 3461 de 2025 del Ministerio de Trabajo, que redefinió la conformación y
+          funciones de los comités de convivencia laboral con énfasis en la prevención eficaz del
+          acoso, la salud mental y la protección de derechos fundamentales.
+        </p>
+      </>
+    )
+  }
 
   <h2 class="mt-8 text-xl font-semibold text-brand-primary">Conformación</h2>
-  <p class="mt-2 max-w-2xl">
-    El Comité está integrado por representantes del empleador y de los empleados, con un/a
-    presidente/a y un/a secretario/a. La nómina de integrantes de la Seccional Magdalena se
-    publicará en esta sección cuando el Comité la cargue a través del sistema de gestión de
-    contenido — content type <code>integrante-comite</code>.
-  </p>
+  {
+    integrantes.length > 0 ? (
+      <ul class="mt-2 max-w-2xl space-y-4" role="list">
+        {integrantes.map((integrante) => (
+          <li>
+            <p class="font-semibold text-brand-primary">{integrante.nombre}</p>
+            <p class="text-sm text-brand-ink">{integrante.rol}</p>
+            {integrante.biografia_breve && <p class="mt-1 text-sm">{integrante.biografia_breve}</p>}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="mt-2 max-w-2xl">
+        El Comité está integrado por representantes del empleador y de los empleados, con un/a
+        presidente/a y un/a secretario/a. La nómina de integrantes de la Seccional Magdalena se
+        publicará en esta sección cuando el Comité la cargue a través del sistema de gestión de
+        contenido — content type <code>integrante-comite</code>.
+      </p>
+    )
+  }
 
   <h2 class="mt-8 text-xl font-semibold text-brand-primary">Marco legal</h2>
   <p class="mt-2 max-w-2xl">

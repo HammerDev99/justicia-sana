@@ -85,15 +85,19 @@
 
 ### Fase F3 — Contenido Núcleo (Componente 2 de la propuesta, servido desde Strapi)
 
-| ID    | Ítem                                                                                                                                                                      |   GAP   | Esfuerzo |
-| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----: | :------: |
-| F3-01 | "¿Quiénes somos?": estructura CCL, integrantes, funciones, reglamento                                                                                                     |  G-01   |  Medio   |
-| F3-02 | Biblioteca de Normativa: Ley 1010/2006, Res. 2646/2008, 652/2012, 1356/2012, 3461/2025, Ley 1581/2012, 2213/2022, circulares CSJ — con resúmenes en lenguaje claro y PDFs |  G-02   |   Alto   |
-| F3-03 | Material pedagógico: ¿Qué es acoso laboral?, modalidades, cómo actuar (víctima/testigo), infografías descargables                                                         |  G-03   |   Alto   |
-| F3-04 | Noticias y jurisprudencia: listado + detalle de artículos, campañas                                                                                                       |  G-04   |  Medio   |
-| F3-05 | Canales de ayuda: atención psicológica (ARL, bienestar), contacto CCL, ruta de denuncia interna/externa                                                                   |  G-05   |  Medio   |
-| F3-06 | Capacitaciones y comunicados del CCL (calendario informativo + boletines)                                                                                                 | G-13/14 |  Medio   |
-| F3-07 | Página "Radicar una queja": explica el canal formal y enlaza a SIRAL (aclarando confidencialidad y no-anonimato)                                                          |    —    |   Bajo   |
+> **Ejecutado en Sprint S04** — ver `docs/sprints/S04_CONTENIDO_NUCLEO/` (SPECs formales + resumen de progreso).
+
+| ID    | Ítem                                                                                                                                                                      |   GAP   | Esfuerzo | Estado |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----: | :------: | :----: |
+| F3-01 | "¿Quiénes somos?": estructura CCL, integrantes, funciones, reglamento                                                                                                     |  G-01   |  Medio   | `[x]`¹ |
+| F3-02 | Biblioteca de Normativa: Ley 1010/2006, Res. 2646/2008, 652/2012, 1356/2012, 3461/2025, Ley 1581/2012, 2213/2022, circulares CSJ — con resúmenes en lenguaje claro y PDFs |  G-02   |   Alto   | `[x]`¹ |
+| F3-03 | Material pedagógico: ¿Qué es acoso laboral?, modalidades, cómo actuar (víctima/testigo), infografías descargables                                                         |  G-03   |   Alto   | `[x]`¹ |
+| F3-04 | Noticias y jurisprudencia: listado + detalle de artículos, campañas                                                                                                       |  G-04   |  Medio   | `[x]`¹ |
+| F3-05 | Canales de ayuda: atención psicológica (ARL, bienestar), contacto CCL, ruta de denuncia interna/externa                                                                   |  G-05   |  Medio   | `[x]`¹ |
+| F3-06 | Capacitaciones y comunicados del CCL (calendario informativo + boletines)                                                                                                 | G-13/14 |  Medio   | `[x]`¹ |
+| F3-07 | Página "Radicar una queja": explica el canal formal y enlaza a SIRAL (aclarando confidencialidad y no-anonimato)                                                          |    —    |   Bajo   | `[x]`  |
+
+¹ Código cableado contra el cliente Strapi real (F1-04), con degradación agraciada extremo a extremo (verificada contra `cms.sprintjudicial.com`, que hoy responde 403 — sin permisos públicos habilitados todavía). El contenido real (biografías, normas cargadas, recursos, artículos, capacitaciones) depende de F1-01/03/05 (acción humana en el VPS) + insumos que el CCL debe aportar — mismo patrón operativo ya auditado y aprobado en F1 (`AUDIT_02`). F3-02/F3-01 conservan además el contenido estático ya auditado de F2 como fallback mientras Strapi esté vacío.
 
 ### Fase F4 — Transparencia con Cifras (integración SIRAL build-time, solo lectura)
 
