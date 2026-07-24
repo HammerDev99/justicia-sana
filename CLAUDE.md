@@ -32,6 +32,8 @@ justicia-sana/
 ├── README.md                 # Presentación pública del proyecto
 ├── .claude/
 │   ├── skills/sdd-framework-v2/   # Skill CDAID v2 (PDCA) — instalado localmente
+│   ├── skills/refactoring/   # Instrumento Check P7 (code smells)
+│   ├── skills/design-patterns/  # Instrumento Check P8 (GoF, SOLID)
 │   └── agents/               # Sub-agentes con scope attenuation (8)
 ├── agent_docs/               # Documentación técnica por tema (L2)
 │   └── project_status.md     # Estado actual (resto de archivos: F0-04)

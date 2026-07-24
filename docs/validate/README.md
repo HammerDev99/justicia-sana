@@ -41,6 +41,13 @@ Template: `docs/templates/TEMPLATE_AUDITORIA.md` · Prompt de orquestación: `do
 | bandit | `npm audit` + revisión CSP/headers |
 | Result[T,E] + frozen dataclasses | `readonly` / `as const` / tipos estrictos para respuestas de API |
 
+## Skills instalados como instrumentos de Check
+
+| Skill | Uso en auditoría | Nota de adaptación |
+|-------|-------------------|---------------------|
+| `.claude/skills/refactoring/` | P7 (code smells: duplicación, Feature Envy, etc.) | Catálogo y técnicas son agnósticas de lenguaje; `references/java-to-python.md` no aplica aquí — usar el catálogo de smells/técnicas directamente sobre componentes Astro/TS |
+| `.claude/skills/design-patterns/` | P8 (patrones GoF, SOLID) | `examples/*.py` son ilustrativos (Python); trasladar el patrón conceptualmente a TS/Astro, no copiar sintaxis |
+
 ## Historial de auditorías
 
 | # | Fecha | Slug | Gate | Veredicto |
