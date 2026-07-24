@@ -5,9 +5,9 @@
 ## Fase actual
 
 ```
-GATE F3 APROBADO (AUDIT_04) — Sprint S04 (F3 — Contenido Núcleo) completo, 7/7 SPECs. F1 (CMS Strapi) — 3/6 en repo, resto en VPS*
-MVP:      [##############      ] ~72% (F0: 7/7, F1: 3/6 repo, F2: 4/4, F3: 7/7 cableado)
-Total:    [###############     ] ~57% (21/37 ítems)
+Sprint S05 (F4 — Transparencia con Cifras, cross-repo) completo, 3/3 SPECs. F1 (CMS Strapi) — 3/6 en repo, resto en VPS*. Gate F4 pendiente de orden
+MVP:      [################    ] ~83% (F0: 7/7, F1: 3/6 repo, F2: 4/4, F3: 7/7, F4: 3/3 cableado)
+Total:    [##################  ] ~65% (24/37 ítems)
 ```
 
 \* F1-02 y F1-06 cuentan como completados (contrato/manual entregados); su ejecución/capturas reales dependen de F1-01. F1-01, F1-03 y F1-05 requieren acceso humano al VPS — ver `docs/DEPLOYMENT_STRAPI.md`.
@@ -28,6 +28,7 @@ Total:    [###############     ] ~57% (21/37 ítems)
 | 2026-07-24 | Gate F2 auditado y **APROBADO** (`AUDIT_03`, SDD 90.6 %) — PR #1 fusionado a `main`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | 2026-07-24 | **Sprint S04 (F3) completo**: 7 páginas cableadas contra el cliente Strapi real (`fetchNormas`, `fetchQuienesSomos`, `fetchIntegrantesComite`, `fetchCanalesAyuda`, `fetchRecursosPedagogicos`, `fetchArticulos`, `fetchCapacitaciones`, `fetchComunicados`) con degradación agraciada verificada extremo a extremo contra `cms.sprintjudicial.com` (responde 403 hoy); 4 páginas nuevas (`/material-pedagogico`, `/noticias` + `/noticias/[slug]`, `/capacitaciones-y-comunicados`, `/radicar-una-queja`); `PageHeader.astro` extraído (resuelve F2-G); `navLinks` 4→8; 9 páginas construidas, 8 tests E2E nuevos |
 | 2026-07-24 | Gate F3 auditado y **APROBADO** (`AUDIT_04`, SDD 98.2 %) — 3 defectos reales encontrados y corregidos con TDD dentro del gate (2 de seguridad: URLs de media rotas sin prefijo `STRAPI_URL`, enlaces controlados por Strapi sin validar esquema `javascript:`; 1 de test: aserción de status HTTP faltante); +9 tests unitarios (`getStrapiMediaUrl`, `isEnlaceSeguro`, `splitRichtextParagraphs`)                                                                                                                                                                                                                 |
+| 2026-07-24 | **Sprint S05 (F4) completo — cross-repo**: F4-01 en `SIRAL_System` (`GET /api/v1/estadisticas/publicas`, sin JWT, agregación pura con TDD, +11 tests, 294/294); F4-02/F4-03 en `justicia-sana` (`fetchEstadisticasPublicas()` + `/transparencia-y-cifras` + `ConteoBarras.astro` sin JS); verificado con datos reales sembrados en una instancia local de SIRAL, no solo con degradación agraciada; `navLinks` 8→9; 10 páginas construidas, +14 tests unitarios, +4 E2E                                                                                                                                            |
 
 ## Próximo paso
 
@@ -42,9 +43,10 @@ Total:    [###############     ] ~57% (21/37 ítems)
 9. ~~Auditoría de gate F2 (Check)~~ ✅ **AUDIT_03** — APROBADO (SDD 90.6 %, 0 defectos sin resolver; 1 defecto de test de seguridad encontrado y corregido con TDD dentro del gate). PR #1 fusionado a `main`.
 10. ~~Sprint S04 (F3 — Contenido Núcleo)~~ ✅ **Completo** — 7/7 SPECs cableados contra Strapi real con degradación agraciada; contenido real sigue pendiente de F1-01/03/05 + insumos del CCL. PR #2 fusionado a `main`.
 11. ~~Auditoría de gate F3 (Check)~~ ✅ **AUDIT_04** — APROBADO (SDD 98.2 %, 0 defectos sin resolver).
-12. **Siguiente (a tu orden)**: Fase F4 (Transparencia con cifras SIRAL).
+12. ~~Sprint S05 (F4 — Transparencia con Cifras)~~ ✅ **Completo** — 3/3 SPECs, cross-repo con `SIRAL_System`, verificado con datos reales.
+13. **Siguiente (a tu orden)**: Auditoría de gate F4 (Check) — `docs/validate/AUDIT_05_..._GATE_F4_TRANSPARENCIA.md`. Tras ese gate, solo falta F6 (Hardening) para el MVP completo.
 
-## Hallazgos abiertos (post gate F3 — ver `docs/validate/AUDIT_04_2026-07-24_GATE_F3_CONTENIDO.md` §6)
+## Hallazgos abiertos (post gate F3 — ver `docs/validate/AUDIT_04_2026-07-24_GATE_F3_CONTENIDO.md` §6; Sprint S05 aún sin auditar)
 
 | Hallazgo                                                                                | Impacto        | Detalle                                                                                                                  |
 | --------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -68,21 +70,21 @@ Total:    [###############     ] ~57% (21/37 ítems)
 
 ## Métricas
 
-| Métrica             | Valor                                                                                                              |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Plannings           | 3 (P00 v2, P01 v2, P02)                                                                                            |
-| Sprints ejecutados  | S01 (F0) completo — 7/7. S02 (F1) — 3/6 en repo. S03 (F2) completo — 4/4. S04 (F3) completo — 7/7                  |
-| Tests unitarios     | 43 (Vitest) — `src/lib/tokens.ts`, `src/lib/site.ts`, `src/lib/strapi.ts`, `src/lib/richtext.ts`                   |
-| Tests E2E           | 23 (Playwright) — `home.spec.ts` (4) + `layout.spec.ts` (11) + `contenido.spec.ts` (8)                             |
-| Content types       | 9 documentados (contrato) + materializados en `justicia-sana-cms` — 0 en instancia real (cliente sí cableado)      |
-| Páginas funcionales | 9 + ruta dinámica `/noticias/[slug]` (0 generadas hoy, comportamiento esperado sin artículos)                      |
-| Componentes         | 3 layout (BaseLayout/PageLayout/SEO) + 2 (Header/Footer) + 7 UI reutilizables (+ `PageHeader`)                     |
-| `astro check`       | 0 errores (39 archivos)                                                                                            |
-| `npm run lint`      | limpio                                                                                                             |
-| `npm run build`     | OK (9 páginas; token de Strapi verificado ausente en `dist/`)                                                      |
-| Deploy              | **LIVE** (build confirmado) — `justiciasana.sprintjudicial.com`                                                    |
-| Auditorías          | AUDIT_01 (F0, aprobado) · AUDIT_02 (F1, aprobado con salvedad) · AUDIT_03 (F2, aprobado) · AUDIT_04 (F3, aprobado) |
+| Métrica             | Valor                                                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Plannings           | 3 (P00 v2, P01 v2, P02)                                                                                               |
+| Sprints ejecutados  | S01 (F0) — 7/7. S02 (F1) — 3/6 en repo. S03 (F2) — 4/4. S04 (F3) — 7/7. S05 (F4) completo — 3/3 (cross-repo)          |
+| Tests unitarios     | 48 (Vitest) — `src/lib/{tokens,site,strapi,richtext,siral}.ts`. `SIRAL_System`: 294 (unit+integración)                |
+| Tests E2E           | 27 (Playwright) — `home.spec.ts` (4) + `layout.spec.ts` (11) + `contenido.spec.ts` (8) + `transparencia.spec.ts` (4)  |
+| Content types       | 9 documentados (contrato) + materializados en `justicia-sana-cms` — 0 en instancia real (cliente sí cableado)         |
+| Páginas funcionales | 10 + ruta dinámica `/noticias/[slug]` (0 generadas hoy, comportamiento esperado sin artículos)                        |
+| Componentes         | 3 layout (BaseLayout/PageLayout/SEO) + 2 (Header/Footer) + 8 UI reutilizables (+ `PageHeader`, `ConteoBarras`)        |
+| `astro check`       | 0 errores (44 archivos)                                                                                               |
+| `npm run lint`      | limpio                                                                                                                |
+| `npm run build`     | OK (10 páginas; token de Strapi verificado ausente en `dist/`)                                                        |
+| Deploy              | **LIVE** (build confirmado) — `justiciasana.sprintjudicial.com`                                                       |
+| Auditorías          | AUDIT_01 (F0) · AUDIT_02 (F1, con salvedad) · AUDIT_03 (F2) · AUDIT_04 (F3) — todas APROBADO. AUDIT_05 (F4) pendiente |
 
 ---
 
-**Actualizado**: 2026-07-24 (Gate F3 APROBADO — AUDIT_04, 0 defectos sin resolver)
+**Actualizado**: 2026-07-24 (Sprint S05 completo — Fase F4 cross-repo cableada y verificada con datos reales, gate F4 pendiente de auditoría)

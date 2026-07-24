@@ -1,0 +1,66 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import PageHeader from '../components/ui/PageHeader.astro';
+import ComingSoon from '../components/ui/ComingSoon.astro';
+import ConteoBarras from '../components/ui/ConteoBarras.astro';
+import { fetchEstadisticasPublicas } from '../lib/siral';
+
+/**
+ * Cableado real contra SIRAL (F4-02/F4-03). Sin instancia en producción hoy
+ * (SIRAL API "pendiente deploy"), fetchEstadisticasPublicas() degrada a null
+ * y se muestra un placeholder honesto — mismo patrón que F3 con Strapi.
+ */
+const estadisticas = await fetchEstadisticasPublicas();
+const sinDatos = estadisticas === null || estadisticas.total_quejas === 0;
+---
+
+<PageLayout
+  title="Transparencia y cifras"
+  description="Cifras públicas anonimizadas de quejas de acoso laboral gestionadas por el sistema SIRAL."
+>
+  <PageHeader
+    title="Transparencia y cifras"
+    description="Cifras agregadas y anónimas del sistema SIRAL — ningún dato permite identificar a las personas involucradas en una queja."
+  />
+
+  {
+    sinDatos || estadisticas === null ? (
+      <ComingSoon mensaje="Aún no hay cifras públicas disponibles. Se publicarán aquí tan pronto el sistema SIRAL esté desplegado en producción y existan quejas registradas." />
+    ) : (
+      <>
+        <p class="mt-6 text-lg">
+          <strong>{estadisticas.total_quejas}</strong> quejas registradas en total.
+          {estadisticas.tiempo_promedio_resolucion_dias !== null && (
+            <>
+              {' '}
+              Tiempo promedio de resolución:{' '}
+              <strong>{Math.round(estadisticas.tiempo_promedio_resolucion_dias)} días</strong>.
+            </>
+          )}
+        </p>
+
+        <div class="mt-8 grid gap-8 sm:grid-cols-2">
+          <ConteoBarras titulo="Por estado" conteos={estadisticas.por_estado} />
+          <ConteoBarras titulo="Por tipo de conducta" conteos={estadisticas.por_tipo_conducta} />
+        </div>
+
+        <div class="mt-8 max-w-2xl">
+          <ConteoBarras titulo="Por trimestre de radicación" conteos={estadisticas.por_trimestre} />
+        </div>
+
+        {estadisticas.por_seccional.length > 1 && (
+          <div class="mt-8">
+            <h2 class="text-xl font-semibold text-brand-primary">Por seccional</h2>
+            <ul class="mt-4 space-y-2" role="list">
+              {estadisticas.por_seccional.map((seccional) => (
+                <li class="text-sm">
+                  <strong>{seccional.seccional_nombre}</strong>: {seccional.total_quejas} quejas
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </>
+    )
+  }
+</PageLayout>

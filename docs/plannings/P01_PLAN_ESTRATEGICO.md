@@ -101,11 +101,16 @@
 
 ### Fase F4 — Transparencia con Cifras (integración SIRAL build-time, solo lectura)
 
-| ID    | Ítem                                                                                                                 | GAP  | Esfuerzo |
-| ----- | -------------------------------------------------------------------------------------------------------------------- | :--: | :------: |
-| F4-01 | [SIRAL] Endpoint público `GET /api/v1/estadisticas/publicas` — agregados anonimizados por seccional, cacheable       | G-20 |  Medio   |
-| F4-02 | Cliente API SIRAL tipado en `src/lib/` (build-time fetch, resiliente a API caída: build no se rompe)                 | G-20 |  Medio   |
-| F4-03 | Página "Transparencia y cifras": quejas por trimestre, tiempos promedio, tipos de conducta (visualización accesible) | G-20 |  Medio   |
+> **Ejecutado en Sprint S05** — ver `docs/sprints/S05_TRANSPARENCIA_CIFRAS/` (SPECs formales + resumen de progreso). Fase cross-repo: F4-01 se implementó en `SIRAL_System`.
+
+| ID    | Ítem                                                                                                                 | GAP  | Esfuerzo | Estado |
+| ----- | -------------------------------------------------------------------------------------------------------------------- | :--: | :------: | :----: |
+| F4-01 | [SIRAL] Endpoint público `GET /api/v1/estadisticas/publicas` — agregados anonimizados por seccional, cacheable       | G-20 |  Medio   | `[x]`¹ |
+| F4-02 | Cliente API SIRAL tipado en `src/lib/` (build-time fetch, resiliente a API caída: build no se rompe)                 | G-20 |  Medio   | `[x]`² |
+| F4-03 | Página "Transparencia y cifras": quejas por trimestre, tiempos promedio, tipos de conducta (visualización accesible) | G-20 |  Medio   | `[x]`² |
+
+¹ Implementado en `SIRAL_System` (commit `5f75371`, rama `claude/justicia-sana-planning-nb8emp`): `GET /api/v1/estadisticas/publicas`, sin JWT, agregación pura con TDD real. Ver `SIRAL_System/agent_docs/project_status.md`.
+² Cableado contra el endpoint real de SIRAL con degradación agraciada verificada de extremo a extremo (probado contra `https://api.siral.sprintjudicial.com` real → `ENOTFOUND`, sitio construido igual) **y** verificado con datos reales sembrados en una instancia local de SIRAL — ambos caminos confirmados, no solo el de degradación. La API productiva de SIRAL sigue "pendiente deploy" (mismo patrón operativo que Strapi en F1/F3).
 
 ### Fase F5 — Participación Ciudadana (post-MVP — islands + API SIRAL extendida)
 
