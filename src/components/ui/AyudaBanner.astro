@@ -1,0 +1,35 @@
+---
+/**
+ * Banner de ayuda psicológica. `telefono`/`correo` son opcionales a propósito:
+ * mientras el CCL no cargue canales reales en Strapi (F3-05), NO se fabrica
+ * ningún contacto — se enlaza a /canales-de-ayuda en su lugar. Inventar un
+ * número aquí sería activamente dañino para quien lo necesite de verdad.
+ */
+export interface Props {
+  readonly telefono?: string;
+  readonly correo?: string;
+}
+
+const { telefono, correo } = Astro.props;
+const tieneContacto = Boolean(telefono || correo);
+---
+
+<div class="rounded-lg border border-brand-accent/30 bg-brand-accent/5 p-4 text-sm text-brand-ink">
+  <p class="font-semibold text-brand-accent">¿Necesitas apoyo psicológico?</p>
+  {
+    tieneContacto ? (
+      <p class="mt-1">
+        {telefono && <>Teléfono: {telefono}. </>}
+        {correo && <>Correo: {correo}.</>}
+      </p>
+    ) : (
+      <p class="mt-1">
+        Consulta los{' '}
+        <a href="/canales-de-ayuda" class="underline">
+          canales de ayuda disponibles
+        </a>
+        .
+      </p>
+    )
+  }
+</div>

@@ -1,0 +1,60 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import NormaTable from '../components/ui/NormaTable.astro';
+import type { NormaResumen } from '../components/ui/NormaTable.astro';
+
+/**
+ * Contenido estático hasta F3-02 (biblioteca de normativa vía Strapi).
+ * Las normas y descripciones son las mismas ya citadas en CLAUDE.md
+ * (tabla "Contexto Legal") — no se redactan resúmenes nuevos aquí.
+ */
+const normas: readonly NormaResumen[] = [
+  {
+    titulo: 'Ley 1010 de 2006',
+    resumen_lenguaje_claro: 'Definición de acoso laboral, conductas y procedimientos.',
+    estado_vigencia: 'Vigente',
+  },
+  {
+    titulo: 'Resolución 3461 de 2025',
+    resumen_lenguaje_claro:
+      'Conformación y funciones del CCL, procedimiento de hasta 65 días, confidencialidad y apoyo psicológico.',
+    estado_vigencia: 'Vigente',
+  },
+  {
+    titulo: 'Ley 1581 de 2012',
+    resumen_lenguaje_claro:
+      'Habeas Data — este portal no recolecta datos personales sin aviso previo.',
+    estado_vigencia: 'Vigente',
+  },
+  {
+    titulo: 'Ley 2213 de 2022',
+    resumen_lenguaje_claro: 'Notificaciones digitales (aplica al módulo interno SIRAL).',
+    estado_vigencia: 'Vigente',
+  },
+  {
+    titulo: 'Resolución 652 de 2012',
+    resumen_lenguaje_claro: 'Regulación anterior del CCL — referencia histórica.',
+    estado_vigencia: 'Modificada',
+  },
+  {
+    titulo: 'Resolución 1356 de 2012',
+    resumen_lenguaje_claro:
+      'Modificaciones a la regulación anterior del CCL — referencia histórica.',
+    estado_vigencia: 'Modificada',
+  },
+];
+---
+
+<PageLayout
+  title="Normativa"
+  description="Marco legal del Comité de Convivencia Laboral: Ley 1010/2006, Resolución 3461/2025 y más."
+>
+  <h1 class="text-3xl font-bold text-brand-primary sm:text-4xl">Normativa</h1>
+  <p class="mt-4 max-w-2xl text-lg">
+    Marco legal que sustenta la actuación del Comité de Convivencia Laboral.
+  </p>
+
+  <div class="mt-8 overflow-x-auto">
+    <NormaTable normas={normas} />
+  </div>
+</PageLayout>

@@ -1,0 +1,23 @@
+---
+export type CalloutVariant = 'info' | 'legal' | 'warning';
+
+export interface Props {
+  readonly variant?: CalloutVariant;
+  readonly title?: string;
+}
+
+const { variant = 'info', title } = Astro.props;
+
+const variantClasses: Record<CalloutVariant, string> = {
+  info: 'border-brand-primary/30 bg-brand-primary/5 text-brand-ink',
+  legal: 'border-brand-accent/30 bg-brand-accent/5 text-brand-ink',
+  warning: 'border-brand-danger/30 bg-brand-danger/5 text-brand-ink',
+};
+---
+
+<div class:list={['rounded-lg border p-4 text-sm', variantClasses[variant]]} role="note">
+  {title && <p class="mb-1 font-semibold">{title}</p>}
+  <div>
+    <slot />
+  </div>
+</div>

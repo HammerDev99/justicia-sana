@@ -1,8 +1,26 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
+import Card from '../components/ui/Card.astro';
+import Callout from '../components/ui/Callout.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import type { AccordionItem } from '../components/ui/Accordion.astro';
+import AyudaBanner from '../components/ui/AyudaBanner.astro';
+
+const faq: readonly AccordionItem[] = [
+  {
+    question: '¿Qué es el Comité de Convivencia Laboral?',
+    answer:
+      'Es la instancia de la Rama Judicial encargada de la gestión preventiva, confidencial y pedagógica frente al acoso laboral, alineada con la Resolución 3461 de 2025 del Ministerio de Trabajo.',
+  },
+  {
+    question: '¿Puedo radicar una queja desde este portal?',
+    answer:
+      'No. Este portal es informativo y público. Las quejas formales de acoso laboral se tramitan de forma confidencial a través del sistema interno SIRAL, con acceso restringido a servidores judiciales.',
+  },
+];
 ---
 
-<BaseLayout title="Inicio">
+<PageLayout title="Inicio">
   <h1 class="text-3xl font-bold text-brand-primary sm:text-4xl">
     Comité de Convivencia Laboral — Rama Judicial, Seccional Magdalena
   </h1>
@@ -12,27 +30,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     y transparencia.
   </p>
 
+  <div class="mt-6 max-w-2xl">
+    <Callout variant="info" title="¿Buscas radicar una queja?">
+      Este portal es informativo. Las quejas formales de acoso laboral se gestionan de forma
+      confidencial en el sistema interno <strong>SIRAL</strong>, no aquí.
+    </Callout>
+  </div>
+
   <section class="mt-10 grid gap-6 sm:grid-cols-3" aria-label="Accesos rápidos">
-    <a
+    <Card
       href="/canales-de-ayuda"
-      class="rounded-lg border border-brand-surface-alt bg-brand-surface-alt p-6 transition hover:border-brand-accent"
-    >
-      <h2 class="font-semibold text-brand-primary">Ayuda psicológica</h2>
-      <p class="mt-2 text-sm">Canales de atención y bienestar disponibles.</p>
-    </a>
-    <a
+      title="Ayuda psicológica"
+      description="Consulta qué canales de atención publicará el Comité."
+    />
+    <Card
       href="/normativa"
-      class="rounded-lg border border-brand-surface-alt bg-brand-surface-alt p-6 transition hover:border-brand-accent"
-    >
-      <h2 class="font-semibold text-brand-primary">Normativa</h2>
-      <p class="mt-2 text-sm">Ley 1010/2006, Resolución 3461/2025 y más, en lenguaje claro.</p>
-    </a>
-    <a
+      title="Normativa"
+      description="Ley 1010/2006, Resolución 3461/2025 y más."
+    />
+    <Card
       href="/quienes-somos"
-      class="rounded-lg border border-brand-surface-alt bg-brand-surface-alt p-6 transition hover:border-brand-accent"
-    >
-      <h2 class="font-semibold text-brand-primary">¿Quiénes somos?</h2>
-      <p class="mt-2 text-sm">Estructura, integrantes y funciones del Comité.</p>
-    </a>
+      title="¿Quiénes somos?"
+      description="Objetivo, conformación y marco legal del Comité."
+    />
   </section>
-</BaseLayout>
+
+  <section class="mt-10 max-w-2xl">
+    <h2 class="text-xl font-semibold text-brand-primary">Preguntas frecuentes</h2>
+    <div class="mt-4">
+      <Accordion items={faq} />
+    </div>
+  </section>
+
+  <div class="mt-10 max-w-2xl">
+    <AyudaBanner />
+  </div>
+</PageLayout>

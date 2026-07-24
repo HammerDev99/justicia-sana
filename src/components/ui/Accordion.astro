@@ -1,0 +1,29 @@
+---
+/**
+ * Acordeón HTML-first: usa <details>/<summary> nativos — funciona con
+ * teclado y lector de pantalla sin una sola línea de JavaScript.
+ */
+export interface AccordionItem {
+  readonly question: string;
+  readonly answer: string;
+}
+
+export interface Props {
+  readonly items: readonly AccordionItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="divide-y divide-brand-surface-alt rounded-lg border border-brand-surface-alt">
+  {
+    items.map((item) => (
+      <details class="group p-4">
+        <summary class="cursor-pointer list-none font-medium text-brand-primary marker:content-none">
+          {item.question}
+        </summary>
+        <p class="mt-2 text-sm text-brand-ink">{item.answer}</p>
+      </details>
+    ))
+  }
+</div>
