@@ -25,14 +25,14 @@ Sprint 02: [###########------------] ~50% (3/6 SPECs completados en el repo; 3 r
 
 ## Registro de Progreso
 
-| Fecha      | SPEC     | Descripción                                                     | Commit                               | Tests | Notas                                                                                     |
-| ---------- | -------- | --------------------------------------------------------------- | ------------------------------------ | :---: | ----------------------------------------------------------------------------------------- |
-| 2026-07-24 | S02-F1-1 | Aprovisionar Strapi v5 + PostgreSQL en EasyPanel                | (pendiente de registrar tras commit) |   —   | **Pendiente** — acción humana. Guía: `docs/DEPLOYMENT_STRAPI.md`                          |
-| 2026-07-24 | S02-F1-2 | Content types (9): documentados como contrato JSON              | (pendiente de registrar tras commit) |   —   | `docs/content-types/strapi-justicia-sana-content-types.md`; creación real depende de F1-1 |
-| 2026-07-24 | S02-F1-3 | Roles y permisos — Editor CCL + token read-only                 | (pendiente de registrar tras commit) |   —   | Documentado en `docs/DEPLOYMENT_STRAPI.md`; ejecución depende de F1-1                     |
-| 2026-07-24 | S02-F1-4 | Cliente Strapi tipado (`src/lib/types.ts`, `src/lib/strapi.ts`) | (pendiente de registrar tras commit) |  +22  | TDD real (RED→GREEN); token verificado ausente en `dist/` tras build                      |
-| 2026-07-24 | S02-F1-5 | Webhook Strapi publish → deploy hook EasyPanel                  | (pendiente de registrar tras commit) |   —   | Documentado en `docs/DEPLOYMENT_STRAPI.md`; requiere instancia Strapi real (F1-1)         |
-| 2026-07-24 | S02-F1-6 | Manual del editor CCL (borrador estructural)                    | (pendiente de registrar tras commit) |   —   | `docs/MANUAL_EDITOR_CCL.md`; capturas reales diferidas a post-F1-1                        |
+| Fecha      | SPEC     | Descripción                                                     | Commit    | Tests | Notas                                                                                     |
+| ---------- | -------- | --------------------------------------------------------------- | --------- | :---: | ----------------------------------------------------------------------------------------- |
+| —          | S02-F1-1 | Aprovisionar Strapi v5 + PostgreSQL en EasyPanel                | —         |   —   | **Pendiente** — acción humana. Guía commiteada en `6c3c9d9`: `docs/DEPLOYMENT_STRAPI.md`  |
+| 2026-07-24 | S02-F1-2 | Content types (9): documentados como contrato JSON              | `6c3c9d9` |   —   | `docs/content-types/strapi-justicia-sana-content-types.md`; creación real depende de F1-1 |
+| —          | S02-F1-3 | Roles y permisos — Editor CCL + token read-only                 | —         |   —   | **Pendiente** — acción humana. Guía commiteada en `6c3c9d9`: `docs/DEPLOYMENT_STRAPI.md`  |
+| 2026-07-24 | S02-F1-4 | Cliente Strapi tipado (`src/lib/types.ts`, `src/lib/strapi.ts`) | `6c3c9d9` |  +22  | TDD real (RED→GREEN); token verificado ausente en `dist/` tras build                      |
+| —          | S02-F1-5 | Webhook Strapi publish → deploy hook EasyPanel                  | —         |   —   | **Pendiente** — acción humana. Guía commiteada en `6c3c9d9`: `docs/DEPLOYMENT_STRAPI.md`  |
+| 2026-07-24 | S02-F1-6 | Manual del editor CCL (borrador estructural)                    | `6c3c9d9` |   —   | `docs/MANUAL_EDITOR_CCL.md`; capturas reales diferidas a post-F1-1                        |
 
 ---
 

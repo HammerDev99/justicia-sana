@@ -64,7 +64,7 @@
 - [x] Cada atributo sensible a idioma claro/legal (resúmenes, textos) tiene su campo dedicado
 - [ ] **Divergencia esperada, no defecto**: la creación real de los content types en el Strapi Admin del VPS requiere F1-01 completado — este SPEC entrega el contrato, no la instancia
 
-**Verificado**: 2026-07-24 (documento) | **Commit**: (ver registro de progreso)
+**Verificado**: 2026-07-24 (documento) | **Commit**: `6c3c9d9`
 
 ---
 
@@ -115,7 +115,7 @@
 - [x] `npx astro check` sin errores (tipos `readonly`, sin `any`)
 - [x] El token no aparece en ningún archivo bajo `dist/` tras `npm run build` (grep de verificación)
 
-**Verificado**: 2026-07-24 | **Commit**: (ver registro de progreso)
+**Verificado**: 2026-07-24 | **Commit**: `6c3c9d9`
 
 ---
 
@@ -159,7 +159,7 @@
 - [x] Cubre el flujo de publicación de los 9 content types
 - [ ] **Diferido explícitamente**: capturas de pantalla reales, a agregar cuando exista una instancia Strapi con contenido de prueba (tras F1-01)
 
-**Verificado**: 2026-07-24 (borrador) | **Commit**: (ver registro de progreso)
+**Verificado**: 2026-07-24 (borrador) | **Commit**: `6c3c9d9`
 
 ---
 
