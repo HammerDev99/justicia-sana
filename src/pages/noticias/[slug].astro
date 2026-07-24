@@ -2,6 +2,7 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import PageHeader from '../../components/ui/PageHeader.astro';
 import { fetchArticulos } from '../../lib/strapi';
+import { splitRichtextParagraphs } from '../../lib/richtext';
 import type { Articulo } from '../../lib/types';
 
 interface ArticuloPath {
@@ -28,14 +29,7 @@ export interface Props {
 
 const { articulo } = Astro.props;
 
-/**
- * `cuerpo` viene de un campo `richtext` de Strapi. Deliberadamente NO se
- * renderiza con `set:html` — se divide en párrafos de texto plano, que Astro
- * escapa automáticamente. Mitiga XSS almacenado si una cuenta editora es
- * comprometida o publica contenido malicioso; se pierde formato enriquecido
- * a cambio (decisión documentada en SPEC_S04_F3_CONTENIDO.md).
- */
-const parrafos = articulo.cuerpo.split(/\n{2,}/);
+const parrafos = splitRichtextParagraphs(articulo.cuerpo);
 ---
 
 <PageLayout title={articulo.titulo} description={articulo.resumen}>

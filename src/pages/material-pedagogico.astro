@@ -2,7 +2,7 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import PageHeader from '../components/ui/PageHeader.astro';
 import ComingSoon from '../components/ui/ComingSoon.astro';
-import { fetchRecursosPedagogicos } from '../lib/strapi';
+import { fetchRecursosPedagogicos, getStrapiMediaUrl, isEnlaceSeguro } from '../lib/strapi';
 
 /**
  * Cableado real contra Strapi (F3-03). Sin instancia en producción hoy,
@@ -30,13 +30,20 @@ const recursos = await fetchRecursosPedagogicos();
             </p>
             <p class="mt-1 font-semibold text-brand-primary">{recurso.titulo}</p>
             <p class="mt-1 text-sm">{recurso.descripcion}</p>
-            {recurso.url_video && (
-              <a href={recurso.url_video} class="mt-2 inline-block text-sm underline">
+            {recurso.url_video && isEnlaceSeguro(recurso.url_video) && (
+              <a
+                href={recurso.url_video}
+                rel="noopener noreferrer"
+                class="mt-2 inline-block text-sm underline"
+              >
                 Ver video
               </a>
             )}
             {recurso.archivo && (
-              <a href={recurso.archivo.url} class="mt-2 inline-block text-sm underline">
+              <a
+                href={getStrapiMediaUrl(recurso.archivo)}
+                class="mt-2 inline-block text-sm underline"
+              >
                 Descargar
               </a>
             )}
@@ -44,9 +51,7 @@ const recursos = await fetchRecursosPedagogicos();
         ))}
       </ul>
     ) : (
-      <div class="mt-8 max-w-2xl">
-        <ComingSoon mensaje="El Comité está preparando el material pedagógico sobre acoso laboral (infografías, folletos, videos y guías). Se publicará en esta sección tan pronto esté disponible." />
-      </div>
+      <ComingSoon mensaje="El Comité está preparando el material pedagógico sobre acoso laboral (infografías, folletos, videos y guías). Se publicará en esta sección tan pronto esté disponible." />
     )
   }
 </PageLayout>

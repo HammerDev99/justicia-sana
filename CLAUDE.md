@@ -70,7 +70,7 @@ npm run lint:fix      # Autofix ESLint + Prettier
 ## Estado Actual
 
 ```
-Fase:      SPRINT S04 completo (Fase F3 — Contenido Núcleo) — cableado real contra Strapi, degradación agraciada verificada. Sprint S02 (F1) sigue 3/6 en repo. Gate F3 pendiente de orden
+Fase:      GATE F3 APROBADO (docs/validate/AUDIT_04) — cableado real contra Strapi, 3 defectos (2 de seguridad) corregidos en el gate. Sprint S02 (F1) sigue 3/6 en repo. F4 pendiente de orden
 Progreso:  [##############      ] ~72% implementación (21/29 ítems MVP)
 ```
 
@@ -78,8 +78,8 @@ Progreso:  [##############      ] ~72% implementación (21/29 ítems MVP)
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Plannings  | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7)                                                   |
 | Sprints    | S01 completo (F0). S02 (F1) — 3/6 en repo. S03 (F2) completo — 4/4. S04 (F3) completo — 7/7 (ver `docs/sprints/S04_CONTENIDO_NUCLEO/00_RESUMEN_SPRINT.md`) |
-| Auditorías | AUDIT_01 (F0), AUDIT_02 (F1) y AUDIT_03 (F2) APROBADO — SDD 90.6 % en F2, 0 defectos sin resolver. AUDIT_04 (F3) pendiente de orden                        |
-| Tests      | 34 unit (Vitest) + 23 E2E (Playwright), todos en verde                                                                                                     |
+| Auditorías | AUDIT_01 (F0), AUDIT_02 (F1), AUDIT_03 (F2) y AUDIT_04 (F3) APROBADO — SDD 98.2 % en F3, 0 defectos sin resolver                                           |
+| Tests      | 43 unit (Vitest) + 23 E2E (Playwright), todos en verde                                                                                                     |
 | Deploy     | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                                                                                |
 | Pendiente  | F1-01/03/05 (Strapi real) — acción humana en el VPS, guía en `docs/DEPLOYMENT_STRAPI.md`. F3 cableado pero sin contenido real hasta entonces + insumos CCL |
 | MVP        | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                                                                          |

@@ -71,8 +71,8 @@ Sprint 04: [########################] 100% (7/7 SPECs completados)
 
 ## Próximos Pasos
 
-1. Auditoría de gate F3 (`docs/validate/AUDIT_04_..._GATE_F3_CONTENIDO.md`) — Check del ciclo PDCA.
-2. Tras gate F3 aprobado: Fase F4 (Transparencia con cifras SIRAL) — **pendiente de orden explícita del propietario del proyecto**.
+1. ~~Auditoría de gate F3~~ — **APROBADO** (SDD 98.2 %, 3 defectos encontrados y corregidos en el gate — 2 de seguridad real: URLs de media rotas y enlaces sin validar esquema). Ver `docs/validate/AUDIT_04_2026-07-24_GATE_F3_CONTENIDO.md`.
+2. Fase F4 (Transparencia con cifras SIRAL) — **pendiente de orden explícita del propietario del proyecto**.
 3. Sigue pendiente de acción humana: F1-01/03/05 (instancia real de Strapi) + que el CCL cargue contenido real — sin esto, F3 seguirá mostrando los fallbacks/placeholders honestos en producción.
 
 ---

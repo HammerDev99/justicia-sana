@@ -1,6 +1,7 @@
 import type {
   StrapiCollectionResponse,
   StrapiSingleResponse,
+  StrapiMedia,
   Norma,
   Articulo,
   RecursoPedagogico,
@@ -222,4 +223,25 @@ export async function fetchQuienesSomos(): Promise<QuienesSomos | null> {
 
 export async function fetchHome(): Promise<Home | null> {
   return fetchSingle<Home>('home', { populate: '*' });
+}
+
+/**
+ * Convención documentada en agent_docs/strapi_integration.md: el proveedor
+ * local de Strapi devuelve URLs relativas ("/uploads/x.pdf"), que hay que
+ * prefijar con STRAPI_URL. Un proveedor externo (CDN) ya devuelve absoluta.
+ */
+export function getStrapiMediaUrl(media: StrapiMedia): string {
+  return media.url.startsWith('http') ? media.url : `${STRAPI_URL}${media.url}`;
+}
+
+/**
+ * Los campos de texto libre en Strapi (url_video, enlace_inscripcion) los
+ * escribe un editor humano y aceptan cualquier string. Astro escapa el
+ * contenido del atributo `href`, pero no valida su esquema — sin este
+ * chequeo, un valor como "javascript:..." se ejecutaría al hacer clic si
+ * una cuenta editora de Strapi es comprometida. Solo se permite http(s);
+ * cualquier otro esquema se descarta (no se renderiza el enlace).
+ */
+export function isEnlaceSeguro(url: string): boolean {
+  return /^https?:\/\//i.test(url);
 }

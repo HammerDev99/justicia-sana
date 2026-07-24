@@ -19,7 +19,9 @@ test.describe('PageLayout — Header/Footer en todas las páginas', () => {
     await expect(activeLink).toHaveAttribute('aria-current', 'page');
   });
 
-  test('cero errores de consola en las páginas nuevas', async ({ page }) => {
+  test('cero errores de consola en quienes-somos, normativa y canales-de-ayuda', async ({
+    page,
+  }) => {
     for (const path of ['/quienes-somos', '/normativa', '/canales-de-ayuda']) {
       const errors: string[] = [];
       page.on('pageerror', (err) => errors.push(err.message));

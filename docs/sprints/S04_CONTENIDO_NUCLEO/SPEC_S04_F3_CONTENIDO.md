@@ -20,7 +20,7 @@
 Por lo tanto, F3 se ejecuta con el mismo patrón operativo ya auditado y aprobado en F1 (`AUDIT_02`, "APROBADO (código) con salvedad operativa"):
 
 1. **Todas las páginas de F3-01/02/05 quedan cableadas contra el cliente Strapi real** (`fetchQuienesSomos`, `fetchIntegrantesComite`, `fetchNormas`, `fetchCanalesAyuda` — funciones ya construidas y auditadas en F1). Ninguna usa datos mockeados nuevos.
-2. **F3-03/04/06 son páginas completamente nuevas**, también cableadas contra Strapi (`fetchRecursosPedagogicos`, `fetchArticulos`/`fetchArticuloBySlug`, `fetchCapacitaciones`/`fetchComunicados`).
+2. **F3-03/04/06 son páginas completamente nuevas**, también cableadas contra Strapi (`fetchRecursosPedagogicos`, `fetchArticulos`, `fetchCapacitaciones`/`fetchComunicados`).
 3. **Degradación agraciada verificada de extremo a extremo**: como hoy no hay instancia real, cada `fetch*` real devuelve `[]`/`null` (comportamiento ya probado en F1) y cada página cae a un estado honesto — o el contenido estático ya auditado de F2 (quienes-somos, normativa), o un placeholder `ComingSoon` explícito (para contenido que F2 no cubrió). **Esto no es un mock**: es el comportamiento real de producción hasta que el CCL publique contenido, y valida en caliente (sin instancia de prueba) que el sitio nunca se rompe si Strapi está vacío o caído — el criterio de aceptación de P01 ("build no se rompe si Strapi/SIRAL están caídos").
 4. **F3-07 (Radicar una queja) es 100% estática**, sin dependencia de Strapi — no hay ningún GAP de contenido que la bloquee, así que se implementa completa en este sprint.
 5. **Extracción de `PageHeader.astro`**: resuelve el hallazgo diferido F2-G (`AUDIT_03`) — con el crecimiento de 5 a 9 páginas, la duplicación de las clases Tailwind del `<h1>` ya justifica la abstracción (regla de 3+ con criterio, ya no es prematura).
@@ -154,7 +154,7 @@ Por lo tanto, F3 se ejecuta con el mismo patrón operativo ya auditado y aprobad
 **Cambios requeridos**:
 
 1. `noticias/index.astro`: `await fetchArticulos()`. Si hay artículos, lista (título, categoría, resumen, fecha) enlazando a `/noticias/{slug}`. Si `[]`, `ComingSoon`.
-2. `noticias/[slug].astro`: `getStaticPaths()` genera una ruta por artículo real (hoy, 0 rutas — comportamiento correcto y esperado, no es un error). Renderiza `cuerpo` como párrafos de texto plano (ver regla de seguridad en el resumen del sprint — sin `set:html`).
+2. `noticias/[slug].astro`: `getStaticPaths()` genera una ruta por artículo real, pasando el `Articulo` completo como prop (evita un segundo fetch por artículo — mejor diseño que llamar a `fetchArticuloBySlug`, que por eso queda sin usar en `src/pages/`; permanece en `strapi.ts` como parte del cliente genérico ya auditado en F1). Hoy 0 rutas generadas — comportamiento correcto y esperado, no es un error. Renderiza `cuerpo` como párrafos de texto plano (ver regla de seguridad en el resumen del sprint — sin `set:html`).
 3. Añadida a `navLinks`.
 
 **Criterios de aceptación**:

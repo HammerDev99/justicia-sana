@@ -1,7 +1,8 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import PageHeader from '../components/ui/PageHeader.astro';
-import { fetchQuienesSomos, fetchIntegrantesComite } from '../lib/strapi';
+import { fetchQuienesSomos, fetchIntegrantesComite, getStrapiMediaUrl } from '../lib/strapi';
+import { splitRichtextParagraphs } from '../lib/richtext';
 
 /**
  * Cableado real contra Strapi (F3-01). Hoy no existe instancia en producción
@@ -26,14 +27,21 @@ const integrantes = await fetchIntegrantesComite();
     quienesSomos ? (
       <>
         <h2 class="mt-8 text-xl font-semibold text-brand-primary">Misión</h2>
-        <p class="mt-2 max-w-2xl">{quienesSomos.mision}</p>
+        {splitRichtextParagraphs(quienesSomos.mision).map((parrafo) => (
+          <p class="mt-2 max-w-2xl">{parrafo}</p>
+        ))}
 
         <h2 class="mt-8 text-xl font-semibold text-brand-primary">Funciones</h2>
-        <p class="mt-2 max-w-2xl">{quienesSomos.funciones}</p>
+        {splitRichtextParagraphs(quienesSomos.funciones).map((parrafo) => (
+          <p class="mt-2 max-w-2xl">{parrafo}</p>
+        ))}
 
         {quienesSomos.reglamento_pdf && (
           <p class="mt-4">
-            <a href={quienesSomos.reglamento_pdf.url} class="text-brand-primary underline">
+            <a
+              href={getStrapiMediaUrl(quienesSomos.reglamento_pdf)}
+              class="text-brand-primary underline"
+            >
               Consultar el reglamento (PDF)
             </a>
           </p>

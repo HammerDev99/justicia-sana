@@ -10,7 +10,8 @@ const paginasNuevas = [
 test.describe('F3 — páginas nuevas con degradación agraciada (Strapi inalcanzable)', () => {
   test('las 4 páginas nuevas responden 200 con header y footer', async ({ page }) => {
     for (const path of paginasNuevas) {
-      await page.goto(path);
+      const response = await page.goto(path);
+      expect(response?.status(), `${path} debería responder 200`).toBe(200);
       await expect(page.getByRole('banner')).toBeVisible();
       await expect(page.getByRole('contentinfo')).toBeVisible();
     }

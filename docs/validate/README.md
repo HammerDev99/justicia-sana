@@ -55,6 +55,7 @@ Template: `docs/templates/TEMPLATE_AUDITORIA.md` · Prompt de orquestación: `do
 | 01  | 2026-07-24 | `GATE_F0_SCAFFOLDING` | F0 (Sprint S01) | **APROBADO** — SDD 100 %, 0 defectos, 3 divergencias rastreadas                                                          |
 | 02  | 2026-07-24 | `GATE_F1_CMS_STRAPI`  | F1 (Sprint S02) | **APROBADO (código)** con salvedad operativa (P02 pendiente) — 0 defectos                                                |
 | 03  | 2026-07-24 | `GATE_F2_LAYOUT`      | F2 (Sprint S03) | **APROBADO** — SDD 90.6 %, 1 defecto encontrado y corregido en el gate (test E2E de seguridad), 8 divergencias diferidas |
+| 04  | 2026-07-24 | `GATE_F3_CONTENIDO`   | F3 (Sprint S04) | **APROBADO** — SDD 98.2 %, 3 defectos (2 de seguridad) encontrados y corregidos en el gate, 7 divergencias diferidas     |
 
 ---
 

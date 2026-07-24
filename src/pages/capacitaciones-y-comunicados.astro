@@ -2,13 +2,12 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import PageHeader from '../components/ui/PageHeader.astro';
 import ComingSoon from '../components/ui/ComingSoon.astro';
-import { fetchCapacitaciones, fetchComunicados } from '../lib/strapi';
+import { fetchCapacitaciones, fetchComunicados, isEnlaceSeguro } from '../lib/strapi';
+import { splitRichtextParagraphs } from '../lib/richtext';
 
 /**
  * Cableado real contra Strapi (F3-06). Sin instancia en producción hoy,
  * ambas colecciones degradan a [] y se muestra un placeholder honesto.
- * `Comunicado.cuerpo` (richtext) se divide en párrafos de texto plano, sin
- * `set:html` — mismo criterio de seguridad que /noticias/[slug].
  */
 const capacitaciones = await fetchCapacitaciones();
 const comunicados = await fetchComunicados();
@@ -26,9 +25,7 @@ const sinContenido = capacitaciones.length === 0 && comunicados.length === 0;
 
   {
     sinContenido ? (
-      <div class="mt-8 max-w-2xl">
-        <ComingSoon mensaje="El Comité aún no ha publicado capacitaciones ni comunicados. Se publicarán en esta sección tan pronto estén disponibles." />
-      </div>
+      <ComingSoon mensaje="El Comité aún no ha publicado capacitaciones ni comunicados. Se publicarán en esta sección tan pronto estén disponibles." />
     ) : (
       <>
         {capacitaciones.length > 0 && (
@@ -42,14 +39,16 @@ const sinContenido = capacitaciones.length === 0 && comunicados.length === 0;
                   <p class="mt-1 text-xs text-brand-ink">
                     {capacitacion.fecha} · {capacitacion.modalidad}
                   </p>
-                  {capacitacion.enlace_inscripcion && (
-                    <a
-                      href={capacitacion.enlace_inscripcion}
-                      class="mt-2 inline-block text-sm underline"
-                    >
-                      Inscripción
-                    </a>
-                  )}
+                  {capacitacion.enlace_inscripcion &&
+                    isEnlaceSeguro(capacitacion.enlace_inscripcion) && (
+                      <a
+                        href={capacitacion.enlace_inscripcion}
+                        rel="noopener noreferrer"
+                        class="mt-2 inline-block text-sm underline"
+                      >
+                        Inscripción
+                      </a>
+                    )}
                 </li>
               ))}
             </ul>
@@ -64,7 +63,7 @@ const sinContenido = capacitaciones.length === 0 && comunicados.length === 0;
                 <li class="rounded-lg border border-brand-surface-alt p-4">
                   <p class="font-semibold text-brand-primary">{comunicado.titulo}</p>
                   <p class="mt-1 text-xs text-brand-ink">{comunicado.fecha}</p>
-                  {comunicado.cuerpo.split(/\n{2,}/).map((parrafo) => (
+                  {splitRichtextParagraphs(comunicado.cuerpo).map((parrafo) => (
                     <p class="mt-2 text-sm">{parrafo}</p>
                   ))}
                 </li>
