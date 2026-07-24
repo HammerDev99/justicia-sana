@@ -1,0 +1,10 @@
+dist/
+.astro/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+
+# Contenido vendorizado verbatim desde HammerDev99/sdd-framework — no reformatear
+.claude/skills/
+.claude/agents/

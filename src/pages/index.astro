@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Inicio">
+  <h1 class="text-3xl font-bold text-brand-primary sm:text-4xl">
+    Comité de Convivencia Laboral — Rama Judicial, Seccional Magdalena
+  </h1>
+  <p class="mt-4 max-w-2xl text-lg">
+    Promovemos ambientes de trabajo sanos y libres de acoso laboral, en armonía con la Resolución
+    3461 de 2025. Este portal es la cara pública del Comité: normativa, pedagogía, canales de ayuda
+    y transparencia.
+  </p>
+
+  <section class="mt-10 grid gap-6 sm:grid-cols-3" aria-label="Accesos rápidos">
+    <a
+      href="/canales-de-ayuda"
+      class="rounded-lg border border-brand-surface-alt bg-brand-surface-alt p-6 transition hover:border-brand-accent"
+    >
+      <h2 class="font-semibold text-brand-primary">Ayuda psicológica</h2>
+      <p class="mt-2 text-sm">Canales de atención y bienestar disponibles.</p>
+    </a>
+    <a
+      href="/normativa"
+      class="rounded-lg border border-brand-surface-alt bg-brand-surface-alt p-6 transition hover:border-brand-accent"
+    >
+      <h2 class="font-semibold text-brand-primary">Normativa</h2>
+      <p class="mt-2 text-sm">Ley 1010/2006, Resolución 3461/2025 y más, en lenguaje claro.</p>
+    </a>
+    <a
+      href="/quienes-somos"
+      class="rounded-lg border border-brand-surface-alt bg-brand-surface-alt p-6 transition hover:border-brand-accent"
+    >
+      <h2 class="font-semibold text-brand-primary">¿Quiénes somos?</h2>
+      <p class="mt-2 text-sm">Estructura, integrantes y funciones del Comité.</p>
+    </a>
+  </section>
+</BaseLayout>

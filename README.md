@@ -26,42 +26,42 @@ Funcionarios (módulo interno) ─▶ SIRAL (FastAPI + PostgreSQL, VPS)
 
 ## Estado
 
-**Planeación completa — implementación no iniciada.** MVP definido: portal informativo + CMS + cifras de transparencia (fases F0–F4 + F6, 5 sprints). Ver [`agent_docs/project_status.md`](agent_docs/project_status.md).
+**Sprint S01 en curso (Fase F0 — Scaffolding).** Astro inicializado, quality gates en verde (12 tests unitarios + 4 E2E), tokens de marca validados WCAG AA, Dockerfile/CI listos. Pendiente: creación del servicio en EasyPanel para tener el walking skeleton LIVE. Ver [`agent_docs/project_status.md`](agent_docs/project_status.md) y [`docs/sprints/S01_SCAFFOLDING/`](docs/sprints/S01_SCAFFOLDING/).
 
 ## Documentación (SDD v2 / CDAID)
 
-| Documento | Contenido |
-|-----------|-----------|
-| [`CLAUDE.md`](CLAUDE.md) | Mapa del proyecto, reglas críticas, convenciones |
-| [`docs/cliente/`](docs/cliente/) | Propuesta original del CCL (docx + Markdown) |
+| Documento                                                                                | Contenido                                               |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------- |
+| [`CLAUDE.md`](CLAUDE.md)                                                                 | Mapa del proyecto, reglas críticas, convenciones        |
+| [`docs/cliente/`](docs/cliente/)                                                         | Propuesta original del CCL (docx + Markdown)            |
 | [`docs/plannings/P00_ANALISIS_REQUISITOS.md`](docs/plannings/P00_ANALISIS_REQUISITOS.md) | Requisitos, gap analysis vs SIRAL, decisiones validadas |
-| [`docs/plannings/P01_PLAN_ESTRATEGICO.md`](docs/plannings/P01_PLAN_ESTRATEGICO.md) | Línea de trabajo: fases, MVP, sprints, esfuerzo |
-| [`docs/sprints/`](docs/sprints/) | [Do] SPECs por sprint (SDD v2) |
-| [`docs/validate/`](docs/validate/) | [Check/Act] Auditorías consolidadas y gates entre fases |
-| [`docs/templates/`](docs/templates/) | Templates de SPEC y auditoría SDD |
-| [`docs/prompts/`](docs/prompts/) | Prompts BASE de orquestación PDCA |
-| [`agent_docs/`](agent_docs/) | Documentación técnica por tema (divulgación progresiva) |
-| [`.claude/`](.claude/) | Skill `sdd-framework-v2` + sub-agentes del framework |
+| [`docs/plannings/P01_PLAN_ESTRATEGICO.md`](docs/plannings/P01_PLAN_ESTRATEGICO.md)       | Línea de trabajo: fases, MVP, sprints, esfuerzo         |
+| [`docs/sprints/`](docs/sprints/)                                                         | [Do] SPECs por sprint (SDD v2)                          |
+| [`docs/validate/`](docs/validate/)                                                       | [Check/Act] Auditorías consolidadas y gates entre fases |
+| [`docs/templates/`](docs/templates/)                                                     | Templates de SPEC y auditoría SDD                       |
+| [`docs/prompts/`](docs/prompts/)                                                         | Prompts BASE de orquestación PDCA                       |
+| [`agent_docs/`](agent_docs/)                                                             | Documentación técnica por tema (divulgación progresiva) |
+| [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)                                               | Guía de despliegue en EasyPanel/DNS (F0-06)             |
+| [`.claude/`](.claude/)                                                                   | Skill `sdd-framework-v2` + sub-agentes del framework    |
 
 Metodología: [SDD Framework v2](https://github.com/HammerDev99/sdd-framework) — ciclo PDCA (Plan → Do → Check → Act).
 
 ## Marco legal
 
-| Norma | Alcance |
-|-------|---------|
-| Ley 1010 de 2006 | Definición de acoso laboral, conductas y procedimientos |
+| Norma                   | Alcance                                                               |
+| ----------------------- | --------------------------------------------------------------------- |
+| Ley 1010 de 2006        | Definición de acoso laboral, conductas y procedimientos               |
 | Resolución 3461 de 2025 | CCL: conformación, procedimiento, confidencialidad, apoyo psicológico |
-| Ley 1581 de 2012 | Habeas Data — el portal no recolecta datos personales sin aviso |
-| Ley 2213 de 2022 | Notificaciones digitales (lado SIRAL) |
+| Ley 1581 de 2012        | Habeas Data — el portal no recolecta datos personales sin aviso       |
+| Ley 2213 de 2022        | Notificaciones digitales (lado SIRAL)                                 |
 
 ## Desarrollo
-
-El scaffolding (Astro) se crea en la fase F0 — ver P01. Una vez inicializado:
 
 ```bash
 npm install
 npm run dev          # http://localhost:4321
 npm run lint && npx astro check && npm test && npm run build   # quality gates
+npm run test:e2e     # Playwright (requiere build + preview)
 ```
 
 Convención de commits: `tipo(alcance): descripcion | SPEC: JS-XX` (en español).

@@ -40,39 +40,61 @@ justicia-sana/
 ├── docs/                     # L3 — un directorio por propósito PDCA
 │   ├── cliente/              # Propuesta original (docx + md)
 │   ├── plannings/            # [Plan] P00, P01 + template
-│   ├── sprints/              # [Do] SPECs por sprint + _TEMPLATE_SPRINT
+│   ├── sprints/              # [Do] S01_SCAFFOLDING (SPECs + resumen) + _TEMPLATE_SPRINT
 │   ├── validate/             # [Check/Act] AUDIT_NN consolidadas + README
 │   ├── templates/            # TEMPLATE_SDD_SPEC, TEMPLATE_AUDITORIA
 │   ├── prompts/              # Prompts BASE de orquestación (Plan/Check/Do)
-│   └── diagrams/             # Diagramas de arquitectura
-└── src/                      # Se crea en F0-01 (Astro)
+│   ├── diagrams/             # Diagramas de arquitectura
+│   └── DEPLOYMENT.md         # Guía EasyPanel/DNS (F0-06)
+└── src/                      # lib/, layouts/, components/, pages/, styles/
+```
+
+## Quick Start
+
+```bash
+npm install
+npm run dev          # Dev server en http://localhost:4321
+npm run build        # Build estático
+npm run preview      # Sirve dist/ (requerido por E2E)
+```
+
+## Comandos frecuentes
+
+```bash
+npm run lint && npx astro check && npm test && npm run build   # quality gate completo
+npm run test:e2e      # Playwright (requiere build + preview)
+npm run lint:fix      # Autofix ESLint + Prettier
 ```
 
 ## Estado Actual
 
 ```
-Fase:      PLANEACIÓN — P00 v2 + P01 v2 completos (Q1–Q7 validados), F0 pendiente
-Progreso:  [                    ] 0% implementación (0/29 ítems MVP, 0/37 total)
+Fase:      SPRINT S01 (Fase F0 — Scaffolding) — 6/7 SPECs completados en el repo
+Progreso:  [##                  ] ~5% implementación (6/29 ítems MVP)
 ```
 
-| Métrica | Valor |
-|---------|-------|
+| Métrica   | Valor                                                                                                    |
+| --------- | -------------------------------------------------------------------------------------------------------- |
 | Plannings | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7) |
-| Sprints | 0 de 5 del MVP (S01–S05) + 2 post-MVP |
-| MVP | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com |
+| Sprints   | S01 en curso (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`                              |
+| Tests     | 12 unit (Vitest) + 4 E2E (Playwright), todos en verde                                                    |
+| Pendiente | F0-06 — creación del servicio en EasyPanel (acción humana, guía en `docs/DEPLOYMENT.md`)                 |
+| MVP       | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                        |
 
 ## Documentación (divulgación progresiva)
 
-| Necesitas... | Consulta |
-|-------------|----------|
-| Propuesta del cliente | `docs/cliente/PROPUESTA_CCL_PLATAFORMA.md` |
-| Requisitos, gap analysis SIRAL, supuestos | `docs/plannings/P00_ANALISIS_REQUISITOS.md` |
-| Línea de trabajo (fases, sprints, esfuerzo) | `docs/plannings/P01_PLAN_ESTRATEGICO.md` |
-| Metodología SDD Framework v2 (CDAID v2, ciclo PDCA) | Skill local `.claude/skills/sdd-framework-v2/` (canónico: repo `HammerDev99/sdd-framework`) |
-| Auditorías y gates entre fases | `docs/validate/README.md` + `docs/prompts/01_BASE_CHECK_*` |
-| Referencia código frontend (Astro/TS/Tailwind) | Repo `rugby-bello-site` (`agent_docs/architecture.md`, `strapi_integration.md`) |
-| Referencia dominio acoso laboral | Repo `SIRAL_System` (`CLAUDE.md`, `agent_docs/`) |
-| Referencia deploy VPS (EasyPanel/Traefik/nginx) | Repos `HammerDev99/blog-sprintjudicial` (Dockerfile, nginx.conf) y `HammerDev99/HammeredSolutions` |
+| Necesitas...                                        | Consulta                                                                                           |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Propuesta del cliente                               | `docs/cliente/PROPUESTA_CCL_PLATAFORMA.md`                                                         |
+| Requisitos, gap analysis SIRAL, supuestos           | `docs/plannings/P00_ANALISIS_REQUISITOS.md`                                                        |
+| Línea de trabajo (fases, sprints, esfuerzo)         | `docs/plannings/P01_PLAN_ESTRATEGICO.md`                                                           |
+| Metodología SDD Framework v2 (CDAID v2, ciclo PDCA) | Skill local `.claude/skills/sdd-framework-v2/` (canónico: repo `HammerDev99/sdd-framework`)        |
+| Auditorías y gates entre fases                      | `docs/validate/README.md` + `docs/prompts/01_BASE_CHECK_*`                                         |
+| Arquitectura, convenciones, testing, antipatrones   | `agent_docs/` (architecture, code_conventions, testing, workflow, antipatterns)                    |
+| Desplegar en el VPS (EasyPanel/DNS)                 | `docs/DEPLOYMENT.md`                                                                               |
+| Referencia código frontend (Astro/TS/Tailwind)      | Repo `rugby-bello-site` (`agent_docs/architecture.md`, `strapi_integration.md`)                    |
+| Referencia dominio acoso laboral                    | Repo `SIRAL_System` (`CLAUDE.md`, `agent_docs/`)                                                   |
+| Referencia deploy VPS (EasyPanel/Traefik/nginx)     | Repos `HammerDev99/blog-sprintjudicial` (Dockerfile, nginx.conf) y `HammerDev99/HammeredSolutions` |
 
 ## Reglas Críticas (resumen)
 
@@ -86,17 +108,18 @@ Progreso:  [                    ] 0% implementación (0/29 ítems MVP, 0/37 tota
 
 ## Contexto Legal
 
-| Norma | Alcance |
-|-------|---------|
-| Ley 1010 de 2006 | Definición de acoso laboral, conductas, procedimientos |
-| Resolución 3461 de 2025 | CCL: conformación, procedimiento ≤ 65 días, confidencialidad, apoyo psicológico |
-| Ley 1581 de 2012 | Habeas Data — el portal no recolecta datos personales sin aviso |
-| Ley 2213 de 2022 | Notificaciones digitales (lado SIRAL) |
-| Res. 652/2012 y 1356/2012 | Regulación anterior del CCL (referencia histórica) |
+| Norma                     | Alcance                                                                         |
+| ------------------------- | ------------------------------------------------------------------------------- |
+| Ley 1010 de 2006          | Definición de acoso laboral, conductas, procedimientos                          |
+| Resolución 3461 de 2025   | CCL: conformación, procedimiento ≤ 65 días, confidencialidad, apoyo psicológico |
+| Ley 1581 de 2012          | Habeas Data — el portal no recolecta datos personales sin aviso                 |
+| Ley 2213 de 2022          | Notificaciones digitales (lado SIRAL)                                           |
+| Res. 652/2012 y 1356/2012 | Regulación anterior del CCL (referencia histórica)                              |
 
 ## Compact Instructions
 
 Al compactar, SIEMPRE preservar:
+
 - Las 7 reglas críticas
 - La decisión de arquitectura (estático en VPS + Strapi día 1 + islands post-MVP contra API SIRAL)
 - Las decisiones validadas Q1–Q7 y D-A..D-D de P00

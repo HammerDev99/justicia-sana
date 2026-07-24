@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://justiciasana.sprintjudicial.com/sitemap-index.xml

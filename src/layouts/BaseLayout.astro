@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import { site, navLinks } from '../lib/site';
+
+export interface Props {
+  readonly title: string;
+  readonly description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const pageTitle = `${title} · ${site.shortName}`;
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={new URL(Astro.url.pathname, site.url).toString()} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.shortName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={new URL(Astro.url.pathname, site.url).toString()} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+    <header class="border-b border-brand-surface-alt bg-brand-surface">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+        <a href="/" class="text-lg font-semibold text-brand-primary">
+          {site.shortName}
+        </a>
+        <nav aria-label="Navegación principal">
+          <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium text-brand-ink">
+            {
+              navLinks.map((link) => (
+                <li>
+                  <a href={link.href} class="hover:text-brand-primary hover:underline">
+                    {link.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="contenido" class="mx-auto w-full max-w-5xl flex-1 px-4 py-10">
+      <slot />
+    </main>
+
+    <footer class="border-t border-brand-surface-alt bg-brand-surface-alt">
+      <div class="mx-auto max-w-5xl px-4 py-8 text-sm text-brand-ink">
+        <p>
+          {site.name} — Rama Judicial de Colombia, Seccional Magdalena. Alineado con la Resolución 3461
+          de 2025.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
