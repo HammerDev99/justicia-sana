@@ -20,5 +20,8 @@ COPY --from=builder /src/dist /usr/share/nginx/html
 
 EXPOSE 80
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost/ || exit 1
+# Sin HEALTHCHECK en el Dockerfile: el `wget --spider` de BusyBox (nginx:alpine)
+# es poco fiable y, al fallar bajo Docker Swarm/EasyPanel, provoca un bucle de
+# reinicios (SIGQUIT ~1 min tras arrancar). El patrón probado en el mismo VPS
+# (blog-sprintjudicial) no define HEALTHCHECK; EasyPanel monitorea el servicio
+# por su cuenta. Si se quiere un healthcheck, configurarlo en EasyPanel, no aquí.
