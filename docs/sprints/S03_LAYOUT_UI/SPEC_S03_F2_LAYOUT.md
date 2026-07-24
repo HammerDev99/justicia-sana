@@ -45,7 +45,7 @@
 - [x] `SEO.astro` genera las mismas etiquetas que tenía `BaseLayout` (sin regresión de SEO)
 - [x] `global.css` no declara una fuente que no se carga
 
-**Verificado**: 2026-07-24 | **Commit**: (ver registro de progreso)
+**Verificado**: 2026-07-24 | **Commit**: `de697b5`
 
 ---
 
@@ -70,7 +70,7 @@
 - [x] E2E: la navegación es completamente operable por teclado (heredado de F0, `home.spec.ts` sigue en verde)
 - [x] Cero `<script>` en `Header`/`Footer` (verificado por lectura — ninguno de los dos archivos tiene bloque `<script>`)
 
-**Verificado**: 2026-07-24 | **Commit**: (ver registro de progreso)
+**Verificado**: 2026-07-24 | **Commit**: `de697b5`
 
 ---
 
@@ -98,7 +98,7 @@
 - [x] `AyudaBanner` sin `telefono`/`correo` no renderiza ningún dato de contacto inventado (verificado por E2E — `layout.spec.ts`, sin patrones de teléfono/correo en `/canales-de-ayuda`)
 - [x] `Accordion` funciona sin JavaScript (verificado por E2E interactuando solo con `<details>` nativo — click en `<summary>`, propiedad `open` cambia)
 
-**Verificado**: 2026-07-24 | **Commit**: (ver registro de progreso)
+**Verificado**: 2026-07-24 | **Commit**: `de697b5`
 
 ---
 
@@ -126,7 +126,7 @@
 - [x] `npm run build` genera las 5 páginas (`/`, `/quienes-somos`, `/normativa`, `/canales-de-ayuda`, `/404`) + sitemap sin errores
 - [x] Todo el texto nuevo es trazable a una fuente ya existente en el repo (`CLAUDE.md` tabla "Contexto Legal", propuesta original) — sin datos inventados
 
-**Verificado**: 2026-07-24 | **Commit**: (ver registro de progreso)
+**Verificado**: 2026-07-24 | **Commit**: `de697b5`
 
 ---
 

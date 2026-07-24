@@ -23,12 +23,12 @@ Sprint 03: [########################] 100% (4/4 SPECs completados)
 
 ## Registro de Progreso
 
-| Fecha      | SPEC     | Descripción                                                                                 | Commit                               | Tests | Notas                                                                                    |
-| ---------- | -------- | ------------------------------------------------------------------------------------------- | ------------------------------------ | :---: | ---------------------------------------------------------------------------------------- |
-| 2026-07-24 | S03-F2-1 | `SEO.astro` + `BaseLayout` shell puro + `PageLayout` + fix F0-B                             | (pendiente de registrar tras commit) |   —   | Fuente Inter eliminada (nunca se cargaba); sin Google Fonts por privacidad institucional |
-| 2026-07-24 | S03-F2-2 | `Header.astro` + `Footer.astro` extraídos, `aria-current`, sin JS                           | (pendiente de registrar tras commit) |   —   | Sin menú hamburguesa — 4 ítems no lo justifican, mantiene cero JS                        |
-| 2026-07-24 | S03-F2-3 | 6 componentes UI: Card, Callout, Accordion, NormaTable, AyudaBanner, ComingSoon             | (pendiente de registrar tras commit) |  +10  | `NormaTable` tipado contra `Norma` de `src/lib/types.ts` — listo para F3-02              |
-| 2026-07-24 | S03-F2-4 | Home + 3 páginas nuevas (`/quienes-somos`, `/normativa`, `/canales-de-ayuda`) — cierra F0-A | (pendiente de registrar tras commit) |   —   | `/canales-de-ayuda` sin ningún contacto fabricado — decisión de seguridad deliberada     |
+| Fecha      | SPEC     | Descripción                                                                                 | Commit    | Tests | Notas                                                                                    |
+| ---------- | -------- | ------------------------------------------------------------------------------------------- | --------- | :---: | ---------------------------------------------------------------------------------------- |
+| 2026-07-24 | S03-F2-1 | `SEO.astro` + `BaseLayout` shell puro + `PageLayout` + fix F0-B                             | `de697b5` |   —   | Fuente Inter eliminada (nunca se cargaba); sin Google Fonts por privacidad institucional |
+| 2026-07-24 | S03-F2-2 | `Header.astro` + `Footer.astro` extraídos, `aria-current`, sin JS                           | `de697b5` |   —   | Sin menú hamburguesa — 4 ítems no lo justifican, mantiene cero JS                        |
+| 2026-07-24 | S03-F2-3 | 6 componentes UI: Card, Callout, Accordion, NormaTable, AyudaBanner, ComingSoon             | `de697b5` |  +10  | `NormaTable` tipado contra `Norma` de `src/lib/types.ts` — listo para F3-02              |
+| 2026-07-24 | S03-F2-4 | Home + 3 páginas nuevas (`/quienes-somos`, `/normativa`, `/canales-de-ayuda`) — cierra F0-A | `de697b5` |   —   | `/canales-de-ayuda` sin ningún contacto fabricado — decisión de seguridad deliberada     |
 
 ---
 
