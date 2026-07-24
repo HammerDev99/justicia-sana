@@ -21,9 +21,10 @@ La propuesta pide una **plataforma digital integral** para el Comité de Convive
 | Activo | Estado | Rol en este proyecto |
 |--------|--------|---------------------|
 | **SIRAL** (`SIRAL_System`) | v1.0.0-rc1 — 100% completo (283 tests, FastAPI + Streamlit + PostgreSQL 16, deploy VPS pendiente) | Cubre el Componente 1 (módulo interno). Referencia de dominio, convenciones CDAID y backend a extender |
-| **rugby-bello-site** | LIVE (Astro + TS strict + Tailwind 4 + Cloudflare Pages) | Referencia de arquitectura estática JAMstack, SDD v2, quality gates frontend |
-| **VPS SprintJudicial** | Operativo (EasyPanel + Traefik, Strapi previsto en cms.sprintjudicial.com) | Infraestructura para backend/CMS |
-| **justicia-sana** (este repo) | Vacío | Portal público + complementos que se escapan de SIRAL |
+| **rugby-bello-site** | LIVE (Astro + TS strict + Tailwind 4 + Cloudflare Pages) | Referencia de código frontend (JAMstack, SDD v2, quality gates). Nota: vive en otro dominio (renosbrc.com.co, DNS Cloudflare) — **no** es la referencia de hosting |
+| **VPS SprintJudicial** | Operativo — Hostinger, Ubuntu + EasyPanel + Traefik. Hospeda blog.sprintjudicial.com (contenedor nginx estático) | Infraestructura de hosting, CMS y API para este proyecto |
+| **HammeredSolutions** + **blog-sprintjudicial** | LIVE — fuente Hugo + estático generado, deploy EasyPanel (Dockerfile nginx/caddy) tras Traefik | **Referencia del patrón de despliegue en el VPS**: repo → build EasyPanel → contenedor estático → subdominio |
+| **justicia-sana** (este repo) | Planeación | Portal público + complementos que se escapan de SIRAL |
 
 ---
 
@@ -61,7 +62,7 @@ La propuesta pide una **plataforma digital integral** para el Comité de Convive
 | G-13 | Calendario de capacitaciones con inscripción en línea | **justicia-sana** (contenido + island) |
 | G-14 | Comunicados internos / boletines del CCL | **justicia-sana** (contenido) |
 | G-15 | SSO JudIT (autenticación institucional) | **Diferido** (dependencia institucional UTDI) |
-| G-16 | Enlace soporte técnico JudIT | **justicia-sana** (enlace estático — bajo costo) |
+| G-16 | Enlace soporte técnico JudIT | **Diferido** (Q6: sin unificación con otras plataformas en el MVP) |
 | G-17 | App móvil (Android/iOS) | **PWA** (portal + SIRAL P04) — cross-platform diferido |
 | G-18 | Notificaciones push | **Diferido** a fase PWA avanzada |
 | G-19 | Piloto Seccional Magdalena (SIRAL fue diseñado con cliente de Antioquia) | **SIRAL** (parametrización por seccional) |
@@ -71,46 +72,58 @@ La propuesta pide una **plataforma digital integral** para el Comité de Convive
 
 ## Decisión de arquitectura (resumen)
 
-**justicia-sana = portal público estático (JAMstack) + islands dinámicas puntuales**, complementando a SIRAL sin duplicarlo:
+**justicia-sana = portal público estático (JAMstack) + CMS Strapi desde el día 1 + islands dinámicas puntuales**, todo hospedado en el VPS SprintJudicial (patrón blog-sprintjudicial), complementando a SIRAL sin duplicarlo:
 
 ```
-                    ┌─────────────────────────────────────────┐
-                    │      justicia-sana (este repo)          │
-  Ciudadanía  ───▶  │  Astro estático (Cloudflare Pages)      │
-  Funcionarios      │  - Contenido: content collections (.md) │
-                    │  - Islands: PQRS, encuestas, buzón      │
-                    └───────────────┬─────────────────────────┘
-                                    │ build-time fetch (stats públicas)
-                                    │ runtime fetch (islands → API)
-                    ┌───────────────▼─────────────────────────┐
-                    │   SIRAL (VPS SprintJudicial)            │
-  CCL / Comité ───▶ │   FastAPI + Streamlit + PostgreSQL 16   │
-  (módulo interno)  │   + extensiones: encuestas, PQRS,       │
-                    │     calendario CCL, derivaciones        │
-                    └─────────────────────────────────────────┘
+  Editores CCL ──▶ Strapi v5 (cms.sprintjudicial.com — VPS, EasyPanel)
+  (sin tocar código)      │ publicar contenido
+                          │ webhook ─▶ rebuild automático
+                          ▼
+  GitHub justicia-sana ─▶ EasyPanel build (Astro fetch Strapi en build-time)
+                          │ Dockerfile multi-stage: node build → nginx estático
+                          ▼
+  Ciudadanía ──────▶ Traefik ─▶ justiciasana.sprintjudicial.com
+  Funcionarios            │  - Páginas estáticas (contenido Strapi)
+                          │  - Islands: PQRS, encuestas, buzón (post-MVP)
+                          │ runtime fetch (islands → endpoints públicos)
+                          ▼
+  CCL (módulo    ──▶ SIRAL — siral.sprintjudicial.com (VPS)
+  interno)           FastAPI + Streamlit + PostgreSQL 16
+                     + extensiones: stats públicas, encuestas, PQRS,
+                       calendario CCL, derivaciones, multi-seccional
 ```
 
 Justificación:
-- **Presupuesto cercano a $0** (patrón rugby-bello: Cloudflare Pages free + VPS existente).
-- **Seguridad por diseño**: el portal público no toca datos confidenciales; la separación intranet/DMZ que pide la propuesta se logra por arquitectura (sitio estático sin BD propia).
-- **Un solo backend que mantener** (SIRAL), evitando un segundo sistema con su propia seguridad/auditoría.
+- **Práctico y con lo que se tiene** (Q6): toda la operación en el VPS existente (Hostinger + EasyPanel + Traefik), mismo patrón ya probado con blog.sprintjudicial.com. Sin dependencias de plataformas externas.
+- **Publicación sin tocar código desde el día 1** (Q2): Strapi Admin UI para el CCL; al publicar, un webhook dispara el rebuild del estático en EasyPanel.
+- **Seguridad por diseño**: el portal público no toca datos confidenciales; sitio estático sin BD propia expuesta; Strapi y SIRAL tras Traefik con HTTPS.
+- **Un solo backend de negocio que mantener** (SIRAL), evitando un segundo sistema con su propia seguridad/auditoría.
 - **Lighthouse 95+, accesibilidad WCAG AA, mobile-first**: requisitos de un portal institucional dirigido a ciudadanía.
 
 ---
 
-## Preguntas Abiertas y Supuestos Adoptados
+## Preguntas Abiertas y Supuestos — VALIDADOS (2026-07-24)
 
-> ⚠️ Estos supuestos requieren validación del propietario del proyecto. Cambiarlos altera P01.
+> ✅ Los 7 supuestos fueron validados por el propietario del proyecto (Daniel Arbeláez). Decisiones firmes para P01 v2.
 
-| # | Pregunta | Supuesto adoptado | Alternativas descartadas (por ahora) |
-|---|----------|-------------------|--------------------------------------|
-| Q1 | ¿Rol de justicia-sana frente a SIRAL? | Portal público + complementos; SIRAL sigue siendo el módulo interno y se integra | (b) solo portal estático; (c) plataforma integral que absorbe SIRAL |
-| Q2 | ¿Gestión de contenido? | Markdown/content collections en el repo desde F0; capa de datos diseñada para migrar a Strapi (VPS) cuando cms esté configurado | Strapi desde el día 1 (bloquea por VPS); CMS de terceros |
-| Q3 | ¿Backend para encuestas/PQRS/buzón? | Extender la API FastAPI de SIRAL (endpoints públicos con rate-limit, sin auth, anonimizados) | Microservicio propio; servicios de formularios de terceros |
-| Q4 | ¿App móvil? | PWA instalable (portal + SIRAL P04_PWA_OFFLINE); Flutter/RN documentado como fase post-piloto | Desarrollo nativo dual (costo injustificado para formularios/consultas) |
-| Q5 | ¿Dominio de producción? | Subdominio del VPS/Cloudflare existente (p.ej. `justiciasana.sprintjudicial.com`) hasta definición institucional | Dominio propio (requiere decisión/presupuesto del CCL) |
-| Q6 | ¿SSO JudIT? | Diferido — requiere gestión con UTDI; el portal público no necesita auth y SIRAL ya tiene JWT propio | Integración LDAP especulativa sin acceso al directorio |
-| Q7 | ¿Piloto Magdalena con SIRAL "de Antioquia"? | SIRAL ya modela `Seccional`; se parametriza sede/branding por seccional (planning en repo SIRAL) | Fork de SIRAL por seccional |
+| # | Pregunta | Decisión validada |
+|---|----------|-------------------|
+| Q1 | ¿Rol de justicia-sana frente a SIRAL? | ✅ Portal público + complementos; SIRAL sigue siendo el módulo interno y se integra |
+| Q2 | ¿Gestión de contenido? | ✅ **Strapi v5 desde el día 1** en el VPS (EasyPanel), estructura actualizada y de fácil manejo: el CCL publica desde Strapi Admin sin tocar código; webhook dispara rebuild del estático |
+| Q3 | ¿Backend para encuestas/PQRS/buzón? | ✅ Extender la API FastAPI de SIRAL (endpoints públicos con rate-limit, sin auth, anonimizados) |
+| Q4 | ¿App móvil? | ✅ Sin desarrollo móvil ahora; **PWA como visión** para etapa posterior. Primero el MVP |
+| Q5 | ¿Dominio de producción? | ✅ **`justiciasana.sprintjudicial.com`** (DNS del VPS Hostinger, HTTPS vía Traefik) |
+| Q6 | ¿SSO JudIT / integraciones externas? | ✅ **Ninguna unificación con otras plataformas en el MVP** (ni SSO, ni enlaces de soporte JudIT). Se construye con lo que se tiene |
+| Q7 | ¿Piloto Magdalena con SIRAL "de Antioquia"? | ✅ Parametrizar SIRAL por seccional (ya modela `Seccional`; planning en repo SIRAL) |
+
+### Decisiones de infraestructura derivadas (2026-07-24)
+
+| # | Decisión |
+|---|----------|
+| D-A | **Hosting en el VPS SprintJudicial** (Hostinger, Ubuntu + EasyPanel + Traefik), NO Cloudflare Pages. Patrón probado de `blog-sprintjudicial`: Dockerfile multi-stage (node build Astro → nginx:alpine estático) desplegado por EasyPanel, auto-redeploy al hacer push |
+| D-B | rugby-bello-site queda solo como **referencia de código** (Astro/TS/Tailwind/SDD v2); su hosting (Cloudflare/renosbrc) no aplica aquí |
+| D-C | **Instancia Strapi v5 en el VPS** (cms.sprintjudicial.com u otro subdominio) con PostgreSQL, content types propios de justicia-sana y roles de editor para el CCL. Si rugby-bello activa su CMS después, se evalúa compartir instancia con content types separados |
+| D-D | Triggers de rebuild del sitio: (1) push a `main` del repo, (2) webhook de publicación de Strapi → deploy hook de EasyPanel |
 
 ---
 
@@ -118,12 +131,12 @@ Justificación:
 
 | ID | Hallazgo | Razón de diferimiento |
 |----|----------|----------------------|
-| D-01 | SSO JudIT (G-15) | Dependencia institucional (UTDI); sin acceso al directorio activo |
+| D-01 | SSO JudIT (G-15) | Q6: sin unificación con plataformas externas en el MVP; dependencia institucional (UTDI) |
 | D-02 | Push notifications (G-18) | Requiere PWA madura + backend de suscripciones |
-| D-03 | App nativa/cross-platform (G-17) | PWA cubre el piloto; costo no justificado aún |
-| D-04 | Tickets automáticos JudIT desde casos | La propia propuesta lo marca como futuro/complejo |
+| D-03 | App nativa/cross-platform y PWA (G-17) | Q4: MVP primero; PWA queda como visión de etapa posterior |
+| D-04 | Tickets automáticos y enlaces de soporte JudIT (G-16) | Q6: la propia propuesta lo marca como futuro/complejo |
 | D-05 | Multi-idioma (i18n) | La propuesta lo señala como no imprescindible en Colombia |
-| D-06 | NoSQL/buscador de texto para contenido | Content collections + búsqueda estática suficiente en piloto |
+| D-06 | Búsqueda avanzada de contenido | Búsqueda estática/Strapi básica suficiente en el MVP |
 
 ---
 
@@ -133,10 +146,11 @@ Justificación:
 - [x] Matriz de cobertura SIRAL vs propuesta completa (20 GAPs identificados)
 - [x] Decisión de arquitectura documentada con justificación
 - [x] Supuestos y preguntas abiertas explícitos (7)
-- [ ] Supuestos Q1–Q7 validados por el propietario del proyecto
-- [ ] P01 (plan estratégico) derivado de este análisis
+- [x] Supuestos Q1–Q7 validados por el propietario del proyecto (2026-07-24)
+- [x] Decisiones de infraestructura D-A a D-D registradas (VPS, Strapi, rebuild)
+- [x] P01 (plan estratégico) derivado de este análisis
 
 ---
 
-**Versión**: 1.0
+**Versión**: 2.0 — supuestos validados, arquitectura ajustada a VPS SprintJudicial + Strapi día 1
 **Fecha**: 2026-07-24
