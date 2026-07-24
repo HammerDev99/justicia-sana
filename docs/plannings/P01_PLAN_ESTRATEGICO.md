@@ -55,14 +55,20 @@
 
 ### Fase F1 — CMS Strapi (publicación sin código, día 1)
 
-| ID    | Ítem                                                                                                                                                                                         |   GAP/Decisión    | Esfuerzo |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------: | :------: |
-| F1-01 | Aprovisionar Strapi v5 + PostgreSQL en EasyPanel (subdominio cms, HTTPS Traefik, backups)                                                                                                    |        D-C        |  Medio   |
-| F1-02 | Content types: `norma`, `articulo` (noticias/jurisprudencia), `recurso-pedagogico`, `integrante-comite`, `capacitacion`, `comunicado`, `canal-ayuda`, single types (`quienes-somos`, `home`) | G-01..05, G-13/14 |   Alto   |
-| F1-03 | Roles y permisos: rol Editor CCL (publicar sin admin), API token read-only para build                                                                                                        |        D-C        |   Bajo   |
-| F1-04 | Cliente Strapi tipado en Astro (`src/lib/`) — fetch build-time, tipos `readonly`, sin token en cliente (patrón strapi_integration de rugby-bello)                                            |        Q2         |  Medio   |
-| F1-05 | Webhook Strapi publish → deploy hook EasyPanel (rebuild automático al publicar)                                                                                                              |        D-D        |   Bajo   |
-| F1-06 | Manual del editor CCL (guía breve con capturas: crear/publicar contenido)                                                                                                                    |        Q2         |  Medio   |
+> **Ejecutado en Sprint S02** — ver `docs/sprints/S02_CMS_STRAPI/` (SPECs formales + resumen de progreso).
+
+| ID    | Ítem                                                                                                                                                                                         |   GAP/Decisión    | Esfuerzo | Estado |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------: | :------: | :----: |
+| F1-01 | Aprovisionar Strapi v5 + PostgreSQL en EasyPanel (subdominio cms, HTTPS Traefik, backups)                                                                                                    |        D-C        |  Medio   | `[ ]`¹ |
+| F1-02 | Content types: `norma`, `articulo` (noticias/jurisprudencia), `recurso-pedagogico`, `integrante-comite`, `capacitacion`, `comunicado`, `canal-ayuda`, single types (`quienes-somos`, `home`) | G-01..05, G-13/14 |   Alto   | `[x]`² |
+| F1-03 | Roles y permisos: rol Editor CCL (publicar sin admin), API token read-only para build                                                                                                        |        D-C        |   Bajo   | `[ ]`¹ |
+| F1-04 | Cliente Strapi tipado en Astro (`src/lib/`) — fetch build-time, tipos `readonly`, sin token en cliente (patrón strapi_integration de rugby-bello)                                            |        Q2         |  Medio   | `[x]`  |
+| F1-05 | Webhook Strapi publish → deploy hook EasyPanel (rebuild automático al publicar)                                                                                                              |        D-D        |   Bajo   | `[ ]`¹ |
+| F1-06 | Manual del editor CCL (guía breve con capturas: crear/publicar contenido)                                                                                                                    |        Q2         |  Medio   | `[x]`³ |
+
+¹ **Bloqueante de la instancia real de Strapi** — requiere acción humana en el panel EasyPanel/Strapi Admin del VPS. Guía ejecutable: `docs/DEPLOYMENT_STRAPI.md`.
+² Content types documentados como contrato JSON exacto (`docs/content-types/strapi-justicia-sana-content-types.md`); creación real en el Strapi Admin depende de F1-01.
+³ Manual completo en su estructura y flujo; capturas de pantalla reales diferidas hasta que exista una instancia Strapi (F1-01).
 
 ### Fase F2 — Layout y Sistema de Diseño
 

@@ -28,23 +28,25 @@
 1. Activar el webhook de auto-deploy de EasyPanel para este servicio (se dispara en cada push a `main`, igual que `blog-sprintjudicial`).
 2. Verificar que el pipeline de GitHub Actions (`ci.yml`) no bloquea el deploy — son independientes: CI corre quality gates, EasyPanel reconstruye la imagen por su cuenta al detectar el push.
 
-### 4. Webhook de Strapi (se activa en F1, no ahora)
+### 4. Webhook de Strapi
 
-Cuando Strapi esté aprovisionado (F1-01), añadir un segundo trigger: **Strapi publish → deploy hook de EasyPanel**, para que publicar contenido reconstruya el sitio automáticamente (decisión D-D de P00).
+Ahora que F1 está en curso: ver `docs/DEPLOYMENT_STRAPI.md` para el aprovisionamiento de Strapi (F1-01) y la configuración del webhook **Strapi publish → deploy hook de EasyPanel** (F1-05, decisión D-D de P00).
 
 ### 5. Verificación post-deploy
 
-- [ ] `https://justiciasana.sprintjudicial.com` responde con HTTPS válido.
+- [x] Build de la imagen exitoso en EasyPanel (confirmado 2026-07-24: `astro build` 2 páginas + sitemap, imagen `easypanel/sprintjudicial/justicia-sana`, nginx arrancando y sirviendo tráfico).
+- [ ] `https://justiciasana.sprintjudicial.com` responde con HTTPS válido — **pendiente de confirmación del propietario** (el entorno de desarrollo agentic no tiene salida de red a dominios arbitrarios; no se pudo verificar desde aquí).
 - [ ] La homepage carga el walking skeleton (título, navegación, accesos rápidos).
 - [ ] `curl -I https://justiciasana.sprintjudicial.com` devuelve cabeceras de seguridad (`X-Content-Type-Options`, `X-Frame-Options`) definidas en `nginx.conf`.
-- [ ] Un push de prueba a `main` dispara rebuild automático (revisar logs de EasyPanel).
+- [ ] Un push de prueba a `main` dispara rebuild automático (revisar logs de EasyPanel) — solo se ha verificado el build inicial.
 
 ## Notas
 
-- El `Dockerfile` y `nginx.conf` se verificaron por revisión manual (siguen el patrón de `blog-sprintjudicial`) pero **no se pudieron probar con `docker build` en el entorno de desarrollo agentic** (sin daemon Docker disponible). El primer build real en EasyPanel es la verificación efectiva — si falla, revisar logs de build ahí.
-- Este documento se actualiza con el resultado real una vez ejecutado el primer despliegue.
+- El `Dockerfile` y `nginx.conf` se verificaron por revisión manual (siguen el patrón de `blog-sprintjudicial`) y **el primer build real en EasyPanel confirmó que funcionan** (ver checklist arriba); `docker build` local seguía sin ser posible en el entorno de desarrollo agentic (sin daemon Docker disponible).
+- Un `SIGQUIT` (apagado _graceful_, workers con exit code 0) ocurrió ~1 minuto después del primer arranque del contenedor — consistente con un reinicio de EasyPanel tras el deploy inicial, no un crash. A vigilar si se repite en bucle.
+- Este documento se actualiza con el resultado real una vez confirmada la resolución pública del dominio.
 
 ---
 
-**Estado**: pendiente de ejecución (requiere acceso humano al panel EasyPanel)
+**Estado**: build confirmado en EasyPanel; resolución pública del dominio pendiente de confirmación del propietario
 **Actualizado**: 2026-07-24

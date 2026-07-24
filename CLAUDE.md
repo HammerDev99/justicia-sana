@@ -39,8 +39,9 @@ justicia-sana/
 │   └── project_status.md     # Estado actual (resto de archivos: F0-04)
 ├── docs/                     # L3 — un directorio por propósito PDCA
 │   ├── cliente/              # Propuesta original (docx + md)
+│   ├── content-types/        # Contrato JSON de content types Strapi
 │   ├── plannings/            # [Plan] P00, P01 + template
-│   ├── sprints/              # [Do] S01_SCAFFOLDING (SPECs + resumen) + _TEMPLATE_SPRINT
+│   ├── sprints/              # [Do] S01_SCAFFOLDING, S02_CMS_STRAPI (SPECs + resumen) + _TEMPLATE_SPRINT
 │   ├── validate/             # [Check/Act] AUDIT_NN consolidadas + README
 │   ├── templates/            # TEMPLATE_SDD_SPEC, TEMPLATE_AUDITORIA
 │   ├── prompts/              # Prompts BASE de orquestación (Plan/Check/Do)
@@ -70,15 +71,16 @@ npm run lint:fix      # Autofix ESLint + Prettier
 
 ```
 Fase:      SPRINT S01 completo (Fase F0 — Scaffolding) — walking skeleton LIVE. Sprint S02 (F1) en curso
-Progreso:  [###                 ] ~7% implementación (7/29 ítems MVP)
+Progreso:  [###                 ] ~10% implementación (10/29 ítems MVP)
 ```
 
 | Métrica   | Valor                                                                                                    |
 | --------- | -------------------------------------------------------------------------------------------------------- |
 | Plannings | P00 v2 (requisitos + gap analysis + Q1–Q7 validados), P01 v2 (MVP: F0–F4+F6, 29 ítems; post-MVP: F5, F7) |
-| Sprints   | S01 completo (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`. S02 (F1) en curso           |
-| Tests     | 12 unit (Vitest) + 4 E2E (Playwright), todos en verde                                                    |
+| Sprints   | S01 completo (F0) — ver `docs/sprints/S01_SCAFFOLDING/00_RESUMEN_SPRINT.md`. S02 (F1) — 3/6 en curso     |
+| Tests     | 34 unit (Vitest) + 4 E2E (Playwright), todos en verde                                                    |
 | Deploy    | **LIVE** — build confirmado en EasyPanel, `justiciasana.sprintjudicial.com`                              |
+| Pendiente | F1-01/03/05 (Strapi real) — acción humana en el VPS, guía en `docs/DEPLOYMENT_STRAPI.md`                 |
 | MVP       | Portal informativo + CMS Strapi + cifras SIRAL en justiciasana.sprintjudicial.com                        |
 
 ## Documentación (divulgación progresiva)
@@ -91,7 +93,10 @@ Progreso:  [###                 ] ~7% implementación (7/29 ítems MVP)
 | Metodología SDD Framework v2 (CDAID v2, ciclo PDCA) | Skill local `.claude/skills/sdd-framework-v2/` (canónico: repo `HammerDev99/sdd-framework`)        |
 | Auditorías y gates entre fases                      | `docs/validate/README.md` + `docs/prompts/01_BASE_CHECK_*`                                         |
 | Arquitectura, convenciones, testing, antipatrones   | `agent_docs/` (architecture, code_conventions, testing, workflow, antipatterns)                    |
-| Desplegar en el VPS (EasyPanel/DNS)                 | `docs/DEPLOYMENT.md`                                                                               |
+| Integración con Strapi (cliente, content types)     | `agent_docs/strapi_integration.md` + `docs/content-types/`                                         |
+| Desplegar el sitio en el VPS (EasyPanel/DNS)        | `docs/DEPLOYMENT.md`                                                                               |
+| Aprovisionar Strapi (roles, webhook)                | `docs/DEPLOYMENT_STRAPI.md`                                                                        |
+| Manual de publicación para el CCL                   | `docs/MANUAL_EDITOR_CCL.md`                                                                        |
 | Referencia código frontend (Astro/TS/Tailwind)      | Repo `rugby-bello-site` (`agent_docs/architecture.md`, `strapi_integration.md`)                    |
 | Referencia dominio acoso laboral                    | Repo `SIRAL_System` (`CLAUDE.md`, `agent_docs/`)                                                   |
 | Referencia deploy VPS (EasyPanel/Traefik/nginx)     | Repos `HammerDev99/blog-sprintjudicial` (Dockerfile, nginx.conf) y `HammerDev99/HammeredSolutions` |
