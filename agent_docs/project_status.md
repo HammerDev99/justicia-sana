@@ -17,7 +17,8 @@ Total:    [                    ] 0% (0/37 ítems)
 | 2026-07-24 | Propuesta del cliente archivada (`docs/cliente/`) |
 | 2026-07-24 | P00 v2: gap analysis (20 GAPs) + supuestos Q1–Q7 validados + decisiones D-A..D-D |
 | 2026-07-24 | P01 v2: línea de trabajo MVP/post-MVP, mapa de sprints S01–S07 |
-| 2026-07-24 | Estructura CDAID/SDD v2 conformada (plannings, sprints, templates, agent_docs) |
+| 2026-07-24 | Estructura SDD Framework v2 (PDCA) conformada: plannings, sprints, validate, templates, prompts, diagrams, agent_docs |
+| 2026-07-24 | Skill `sdd-framework-v2` + 8 sub-agentes instalados en `.claude/` (canónico: HammerDev99/sdd-framework) |
 | — | S01 (F0): pendiente de arranque |
 
 ## Próximo paso

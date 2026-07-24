@@ -36,9 +36,14 @@ Funcionarios (módulo interno) ─▶ SIRAL (FastAPI + PostgreSQL, VPS)
 | [`docs/cliente/`](docs/cliente/) | Propuesta original del CCL (docx + Markdown) |
 | [`docs/plannings/P00_ANALISIS_REQUISITOS.md`](docs/plannings/P00_ANALISIS_REQUISITOS.md) | Requisitos, gap analysis vs SIRAL, decisiones validadas |
 | [`docs/plannings/P01_PLAN_ESTRATEGICO.md`](docs/plannings/P01_PLAN_ESTRATEGICO.md) | Línea de trabajo: fases, MVP, sprints, esfuerzo |
-| [`docs/sprints/`](docs/sprints/) | SPECs por sprint (SDD v2) |
+| [`docs/sprints/`](docs/sprints/) | [Do] SPECs por sprint (SDD v2) |
+| [`docs/validate/`](docs/validate/) | [Check/Act] Auditorías consolidadas y gates entre fases |
 | [`docs/templates/`](docs/templates/) | Templates de SPEC y auditoría SDD |
+| [`docs/prompts/`](docs/prompts/) | Prompts BASE de orquestación PDCA |
 | [`agent_docs/`](agent_docs/) | Documentación técnica por tema (divulgación progresiva) |
+| [`.claude/`](.claude/) | Skill `sdd-framework-v2` + sub-agentes del framework |
+
+Metodología: [SDD Framework v2](https://github.com/HammerDev99/sdd-framework) — ciclo PDCA (Plan → Do → Check → Act).
 
 ## Marco legal
 

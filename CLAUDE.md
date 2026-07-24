@@ -30,13 +30,19 @@ Origen: propuesta de Leonardo Fabio Gómez Colón (CCL Magdalena) + Daniel Arbel
 justicia-sana/
 ├── CLAUDE.md                 # Este archivo (mapa del proyecto)
 ├── README.md                 # Presentación pública del proyecto
+├── .claude/
+│   ├── skills/sdd-framework-v2/   # Skill CDAID v2 (PDCA) — instalado localmente
+│   └── agents/               # Sub-agentes con scope attenuation (8)
 ├── agent_docs/               # Documentación técnica por tema (L2)
 │   └── project_status.md     # Estado actual (resto de archivos: F0-04)
-├── docs/
+├── docs/                     # L3 — un directorio por propósito PDCA
 │   ├── cliente/              # Propuesta original (docx + md)
-│   ├── plannings/            # P00 análisis, P01 plan estratégico + template
-│   ├── sprints/              # SPECs por sprint (SDD v2) + _TEMPLATE_SPRINT
-│   └── templates/            # TEMPLATE_SDD_SPEC, TEMPLATE_AUDITORIA
+│   ├── plannings/            # [Plan] P00, P01 + template
+│   ├── sprints/              # [Do] SPECs por sprint + _TEMPLATE_SPRINT
+│   ├── validate/             # [Check/Act] AUDIT_NN consolidadas + README
+│   ├── templates/            # TEMPLATE_SDD_SPEC, TEMPLATE_AUDITORIA
+│   ├── prompts/              # Prompts BASE de orquestación (Plan/Check/Do)
+│   └── diagrams/             # Diagramas de arquitectura
 └── src/                      # Se crea en F0-01 (Astro)
 ```
 
@@ -60,7 +66,8 @@ Progreso:  [                    ] 0% implementación (0/29 ítems MVP, 0/37 tota
 | Propuesta del cliente | `docs/cliente/PROPUESTA_CCL_PLATAFORMA.md` |
 | Requisitos, gap analysis SIRAL, supuestos | `docs/plannings/P00_ANALISIS_REQUISITOS.md` |
 | Línea de trabajo (fases, sprints, esfuerzo) | `docs/plannings/P01_PLAN_ESTRATEGICO.md` |
-| Metodología CDAID / SDD v2 | Skill `cdaid-framework` (en SIRAL_System) |
+| Metodología SDD Framework v2 (CDAID v2, ciclo PDCA) | Skill local `.claude/skills/sdd-framework-v2/` (canónico: repo `HammerDev99/sdd-framework`) |
+| Auditorías y gates entre fases | `docs/validate/README.md` + `docs/prompts/01_BASE_CHECK_*` |
 | Referencia código frontend (Astro/TS/Tailwind) | Repo `rugby-bello-site` (`agent_docs/architecture.md`, `strapi_integration.md`) |
 | Referencia dominio acoso laboral | Repo `SIRAL_System` (`CLAUDE.md`, `agent_docs/`) |
 | Referencia deploy VPS (EasyPanel/Traefik/nginx) | Repos `HammerDev99/blog-sprintjudicial` (Dockerfile, nginx.conf) y `HammerDev99/HammeredSolutions` |
@@ -72,7 +79,7 @@ Progreso:  [                    ] 0% implementación (0/29 ítems MVP, 0/37 tota
 3. **Seguridad**: nada confidencial en este repo/sitio — lo confidencial vive en SIRAL
 4. **Accesibilidad**: WCAG AA, HTML semántico, keyboard nav
 5. **Performance**: Lighthouse ≥ 95
-6. **SDD v2**: todo cambio nace de un SPEC (`JS-XX`) dentro de un sprint, con auditoría posterior
+6. **SDD v2 (PDCA)**: todo cambio nace de un SPEC (`JS-XX`) en un sprint (Do); cada gate de fase se audita en `docs/validate/AUDIT_NN_*.md` (Check) y sus correcciones se documentan ahí (Act)
 7. **Quality gates**: `npm run lint && npx astro check && npm test && npm run build` antes de commit
 
 ## Contexto Legal
