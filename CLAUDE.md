@@ -29,11 +29,14 @@ Origen: propuesta de Leonardo Fabio Gómez Colón (CCL Magdalena) + Daniel Arbel
 ```
 justicia-sana/
 ├── CLAUDE.md                 # Este archivo (mapa del proyecto)
-├── agent_docs/               # Documentación detallada por tema (se crea en F0-04)
+├── README.md                 # Presentación pública del proyecto
+├── agent_docs/               # Documentación técnica por tema (L2)
+│   └── project_status.md     # Estado actual (resto de archivos: F0-04)
 ├── docs/
 │   ├── cliente/              # Propuesta original (docx + md)
-│   ├── plannings/            # P00 análisis, P01 plan estratégico, template
-│   └── sprints/              # SPECs por sprint (SDD v2)
+│   ├── plannings/            # P00 análisis, P01 plan estratégico + template
+│   ├── sprints/              # SPECs por sprint (SDD v2) + _TEMPLATE_SPRINT
+│   └── templates/            # TEMPLATE_SDD_SPEC, TEMPLATE_AUDITORIA
 └── src/                      # Se crea en F0-01 (Astro)
 ```
 
