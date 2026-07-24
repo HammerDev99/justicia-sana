@@ -46,7 +46,7 @@ Template: `docs/templates/TEMPLATE_AUDITORIA.md` · Prompt de orquestación: `do
 | Skill | Uso en auditoría | Nota de adaptación |
 |-------|-------------------|---------------------|
 | `.claude/skills/refactoring/` | P7 (code smells: duplicación, Feature Envy, etc.) | Catálogo y técnicas son agnósticas de lenguaje; `references/java-to-python.md` no aplica aquí — usar el catálogo de smells/técnicas directamente sobre componentes Astro/TS |
-| `.claude/skills/design-patterns/` | P8 (patrones GoF, SOLID) | `examples/*.py` son ilustrativos (Python); trasladar el patrón conceptualmente a TS/Astro, no copiar sintaxis |
+| `.claude/skills/design-patterns/` | P8 (patrones GoF, SOLID) | Usar `examples-typescript/` (21 patrones GoF en TS, verificables con `npx tsc -p tsconfig.json`) como referencia primaria en este proyecto; `examples/*.py` quedan como respaldo conceptual |
 
 ## Historial de auditorías
 
