@@ -2,7 +2,7 @@
 
 Portal web público del Comité de Convivencia Laboral (CCL) de la Rama Judicial de Colombia — piloto Seccional Magdalena. Complementa al sistema SIRAL (módulo interno de gestión de quejas de acoso laboral) con pedagogía, transparencia, normativa y participación (encuestas, PQRS, buzón anónimo). Alineado con Resolución 3461/2025.
 
-Origen: propuesta de Leonardo Fabio Gómez Colón (CCL Magdalena) + Daniel Arbeláez Álvarez (Ing. software, Seccional Antioquia). Ver `docs/cliente/PROPUESTA_CCL_PLATAFORMA.md`.
+Origen: propuesta de un integrante del CCL Magdalena + Daniel Arbeláez Álvarez (ingeniero de software), a título personal. La propuesta original está en `docs/cliente/` solo en local (ignorada por git).
 
 ## Stack
 
@@ -38,7 +38,7 @@ justicia-sana/
 ├── agent_docs/               # Documentación técnica por tema (L2)
 │   └── project_status.md     # Estado actual (resto de archivos: F0-04)
 ├── docs/                     # L3 — un directorio por propósito PDCA
-│   ├── cliente/              # Propuesta original (docx + md)
+│   ├── cliente/              # Propuesta original del CCL (solo local, ignorada por git)
 │   ├── content-types/        # Contrato JSON de content types Strapi
 │   ├── plannings/            # [Plan] P00, P01 + template
 │   ├── sprints/              # [Do] S01_SCAFFOLDING, S02_CMS_STRAPI, S03_LAYOUT_UI, S04_CONTENIDO_NUCLEO (SPECs + resumen) + _TEMPLATE_SPRINT
@@ -88,7 +88,7 @@ Progreso:  [##############      ] ~72% implementación (21/29 ítems MVP)
 
 | Necesitas...                                        | Consulta                                                                                           |
 | --------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Propuesta del cliente                               | `docs/cliente/PROPUESTA_CCL_PLATAFORMA.md`                                                         |
+| Propuesta original del CCL                          | `docs/cliente/PROPUESTA_CCL_PLATAFORMA.md`                                                         |
 | Requisitos, gap analysis SIRAL, supuestos           | `docs/plannings/P00_ANALISIS_REQUISITOS.md`                                                        |
 | Línea de trabajo (fases, sprints, esfuerzo)         | `docs/plannings/P01_PLAN_ESTRATEGICO.md`                                                           |
 | Adecuar Strapi a producción (Postgres, secrets)     | `docs/plannings/P02_STRAPI_PRODUCCION.md`                                                          |

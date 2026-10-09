@@ -8,3 +8,6 @@ coverage/
 test-results/
 playwright-report/
 .DS_Store
+
+# Propuesta original del CCL: documento de un tercero, solo local
+docs/cliente/

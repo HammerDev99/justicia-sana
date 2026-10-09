@@ -1,10 +1,12 @@
-# Justicia Sana — Portal del Comité de Convivencia Laboral
+# Justicia Sana — prototipo de portal sobre convivencia laboral
 
-Portal web público del **Comité de Convivencia Laboral (CCL) de la Rama Judicial de Colombia** — piloto Seccional Magdalena. Promueve la pedagogía, transparencia y prevención del acoso laboral, en armonía con la **Resolución 3461 de 2025** del Ministerio de Trabajo.
+Prototipo de portal informativo para el **Comité de Convivencia Laboral (CCL) de la Rama Judicial de Colombia**, propuesto para la Seccional Magdalena. **Está en evaluación: no es un canal oficial de la Rama Judicial ni del Comité, y no recibe quejas.** Promueve la pedagogía, transparencia y prevención del acoso laboral, en armonía con la **Resolución 3461 de 2025** del Ministerio de Trabajo.
 
-Complementa al sistema [SIRAL](https://github.com/HammerDev99/SIRAL_System) (módulo interno confidencial de gestión de quejas de acoso laboral) con la cara pública del Comité: normativa en lenguaje claro, material pedagógico, canales de ayuda, cifras de transparencia y —en etapas posteriores— participación ciudadana (encuestas de clima, PQRS, buzón anónimo).
+Se diseñó para complementar el prototipo SIRAL (gestión confidencial de quejas de acoso laboral; repositorio privado) con contenidos públicos: normativa en lenguaje claro, material pedagógico, canales de ayuda, cifras de transparencia y —en etapas posteriores— participación ciudadana (encuestas de clima, PQRS, buzón anónimo).
 
-> Iniciativa de **Leonardo Fabio Gómez Colón** (CCL Seccional Magdalena) en articulación con **Daniel Arbeláez Álvarez** (Ing. de software, Seccional Antioquia). Propuesta completa en [`docs/cliente/PROPUESTA_CCL_PLATAFORMA.md`](docs/cliente/PROPUESTA_CCL_PLATAFORMA.md).
+> Iniciativa de un integrante del CCL Seccional Magdalena, en articulación con **Daniel Arbeláez Álvarez** (ingeniero de software), a título personal y sin remuneración. La propuesta original no se publica en este repositorio.
+>
+> _Proyecto personal de software libre. No representa a la Rama Judicial; su adopción como canal oficial requiere la autorización institucional que corresponda._
 
 ## Arquitectura
 
@@ -33,7 +35,6 @@ Funcionarios (módulo interno) ─▶ SIRAL (FastAPI + PostgreSQL, VPS)
 | Documento                                                                                | Contenido                                               |
 | ---------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | [`CLAUDE.md`](CLAUDE.md)                                                                 | Mapa del proyecto, reglas críticas, convenciones        |
-| [`docs/cliente/`](docs/cliente/)                                                         | Propuesta original del CCL (docx + Markdown)            |
 | [`docs/plannings/P00_ANALISIS_REQUISITOS.md`](docs/plannings/P00_ANALISIS_REQUISITOS.md) | Requisitos, gap analysis vs SIRAL, decisiones validadas |
 | [`docs/plannings/P01_PLAN_ESTRATEGICO.md`](docs/plannings/P01_PLAN_ESTRATEGICO.md)       | Línea de trabajo: fases, MVP, sprints, esfuerzo         |
 | [`docs/sprints/`](docs/sprints/)                                                         | [Do] SPECs por sprint (SDD v2)                          |

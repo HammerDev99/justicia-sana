@@ -1,7 +1,7 @@
 # Planning 00 — Análisis de Requisitos: Justicia Sana
 
 **Fecha**: 2026-07-24
-**Origen**: Propuesta "Plataforma Web y Aplicación Móvil del Comité de Convivencia Laboral — Piloto Seccional Magdalena" (`docs/cliente/PROPUESTA_CCL_PLATAFORMA.md`), formulada por Leonardo Fabio Gómez Colón (CCL Seccional Magdalena) en articulación con Daniel Arbeláez Álvarez (Ing. de software, Seccional Antioquia).
+**Origen**: Propuesta "Plataforma Web y Aplicación Móvil del Comité de Convivencia Laboral — Piloto Seccional Magdalena" (`docs/cliente/PROPUESTA_CCL_PLATAFORMA.md`), formulada por un integrante del CCL Seccional Magdalena en articulación con Daniel Arbeláez Álvarez (ingeniero de software), a título personal. La propuesta original no se publica en este repositorio.
 **Objetivo**: Delimitar el alcance de `justicia-sana` frente al sistema SIRAL existente y derivar la línea de trabajo estratégica (P01).
 **Metodología**: SDD v2 (Spec-Driven Development) — Framework CDAID
 
@@ -143,7 +143,7 @@ Justificación:
 
 ## Criterios de Éxito del Análisis
 
-- [x] Propuesta del cliente archivada en `docs/cliente/` (docx original + Markdown)
+- [x] Propuesta original del CCL archivada en `docs/cliente/` (solo local, ignorada por git)
 - [x] Matriz de cobertura SIRAL vs propuesta completa (20 GAPs identificados)
 - [x] Decisión de arquitectura documentada con justificación
 - [x] Supuestos y preguntas abiertas explícitos (7)

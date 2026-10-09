@@ -1,5 +1,25 @@
 import { test, expect } from '@playwright/test';
 
+test.describe('Aviso de prototipo', () => {
+  test('aparece en todas las páginas, incluida la 404', async ({ page }) => {
+    for (const path of [
+      '/',
+      '/quienes-somos',
+      '/normativa',
+      '/material-pedagogico',
+      '/noticias',
+      '/capacitaciones-y-comunicados',
+      '/canales-de-ayuda',
+      '/pagina-inexistente',
+    ]) {
+      await page.goto(path);
+      await expect(page.getByRole('note', { name: /aviso de prototipo/i })).toContainText(
+        /no es un canal oficial/i,
+      );
+    }
+  });
+});
+
 test.describe('PageLayout — Header/Footer en todas las páginas', () => {
   test('el header y el footer aparecen en home, quienes-somos, normativa y canales-de-ayuda', async ({
     page,
@@ -116,12 +136,11 @@ test.describe('Home — accesos rápidos con Card', () => {
     await expect(section.getByRole('link')).toHaveCount(3);
   });
 
-  test('incluye un aviso (Callout) de que las quejas se radican en SIRAL, no aquí', async ({
-    page,
-  }) => {
+  test('incluye un aviso (Callout) de que el sitio no recibe quejas', async ({ page }) => {
     await page.goto('/');
-    const callout = page.getByRole('note');
+    const callout = page.getByRole('main').getByRole('note');
     await expect(callout).toBeVisible();
-    await expect(callout).toContainText('SIRAL');
+    await expect(callout).toContainText(/no recibe quejas/i);
+    await expect(callout).toContainText(/canales oficiales/i);
   });
 });
